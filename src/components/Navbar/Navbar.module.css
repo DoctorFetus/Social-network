@@ -1,0 +1,8 @@
+.nav {
+    grid-area: navigation;
+    background: skyblue;
+}
+.item {
+    color: white;
+    text-decoration: none;
+}
