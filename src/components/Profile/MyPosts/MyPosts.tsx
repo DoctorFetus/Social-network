@@ -14,12 +14,8 @@ const MyPosts = () => {
                 <div>
                     New post
                 </div>
-                <Posts/>
-                <Posts/>
-                <Posts/>
-                <Posts/>
-                <Posts/>
-                <Posts/>
+                <Posts message="Hi, how are you?" likeCounter={15}/>
+                <Posts message="I am dead inside" likeCounter={25}/>
             </div>
     );
 }
