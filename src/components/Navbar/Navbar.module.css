@@ -1,8 +1,14 @@
 .nav {
     grid-area: navigation;
     background: skyblue;
+    padding: 20px;
 }
+
 .item {
     color: white;
     text-decoration: none;
+}
+
+.active {
+    color: darkcyan;
 }

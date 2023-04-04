@@ -1,0 +1,11 @@
+.container {
+    padding: 10px;
+}
+
+button {
+    display: block;
+}
+
+.newPosts {
+    padding: 10px 0;
+}
