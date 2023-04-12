@@ -2,13 +2,14 @@ import React, {FC} from "react"
 import s from "./Message.module.css"
 
 type MessageType = {
-    text: string
+    id: number
+    message: string
 }
 
 const Message: FC <MessageType> = (props) => {
     return (
         <div className={s.message}>
-            {props.text}
+            {props.message}
         </div>
     )
 }

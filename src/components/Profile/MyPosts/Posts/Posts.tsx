@@ -3,6 +3,7 @@ import s from "./Posts.module.css"
 
 
 type PostsType = {
+    id: number,
     message: string,
     likeCounter: number
 }
