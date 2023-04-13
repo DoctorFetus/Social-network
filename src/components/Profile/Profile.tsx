@@ -5,14 +5,16 @@ import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import {PostsType} from "./MyPosts/Posts/Posts";
 
 type ProfileType = {
-    posts: Array<PostsType>
+    state: {
+        posts: Array<PostsType>
+    }
 }
 
-const Profile: React.FC<ProfileType>  = (props) => {
+const Profile: React.FC<ProfileType> = (props) => {
     return (
         <div>
-            <ProfileInfo />
-            <MyPosts posts={props.posts}/>
+            <ProfileInfo/>
+            <MyPosts posts={props.state.posts}/>
         </div>
     );
 }

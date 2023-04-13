@@ -4,7 +4,7 @@ import Posts from "./Posts/Posts";
 import {PostsType} from "./Posts/Posts";
 import posts from "./Posts/Posts";
 
-export type PostsProps = {
+type PostsProps = {
     posts: Array<PostsType>
 }
 
