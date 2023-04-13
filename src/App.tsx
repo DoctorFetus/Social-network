@@ -11,6 +11,7 @@ import Settings from "./components/Settings/Settings";
 import {DialogItemType} from "./components/Dialogs/Dialog/DialogItem";
 import {MessageType} from "./components/Dialogs/Message/Message";
 import {PostsType} from "./components/Profile/MyPosts/Posts/Posts";
+import {FriendType} from "./components/Navbar/Friends/Friend/Friend";
 
 type AppType = {
     state: {
@@ -20,6 +21,9 @@ type AppType = {
         dialogsPage: {
             dialogs: Array<DialogItemType>
             messages: Array<MessageType>
+        },
+        sidebar: {
+            friends: Array<FriendType>
         }
     }
 }
@@ -29,7 +33,7 @@ const App: React.FC<AppType> = (props) => {
         <BrowserRouter>
             <div className="app_wrapper">
                 <Header/>
-                <Navbar/>
+                <Navbar state={props.state.sidebar}/>
                 <div className="app_wrapper_content">
                     <Route path="/profile" render={() => <Profile state={props.state.profilePage}/>}/>
                     <Route path="/dialogs" render={() => <Dialogs state={props.state.dialogsPage}/>}/>

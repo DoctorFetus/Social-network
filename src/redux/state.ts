@@ -19,6 +19,13 @@ let state = {
             {id: 3, message: "Not bad"},
             {id: 4, message: "Wow! That is work!"}
         ]
+    },
+    sidebar: {
+        friends: [
+            {id: 1, name: "Sura", icon:"https://pikuco.ru/upload/test_stable/96d/96d01aba12f9a99d9c0362b263d03969.jpg"},
+            {id: 2, name: "Asin", icon:"https://pikuco.ru/upload/test_stable/96d/96d01aba12f9a99d9c0362b263d03969.jpg"},
+            {id: 3, name: "Gebu", icon:"https://pikuco.ru/upload/test_stable/96d/96d01aba12f9a99d9c0362b263d03969.jpg"}
+        ]
     }
 
 
