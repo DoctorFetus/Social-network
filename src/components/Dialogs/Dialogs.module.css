@@ -4,8 +4,8 @@
     padding: 20px;
 }
 
-.dialog-items {
-
+.dialog_items {
+    text-decoration: none;
 }
 
 .active {

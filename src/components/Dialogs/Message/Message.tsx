@@ -1,7 +1,7 @@
 import React, {FC} from "react"
 import s from "./Message.module.css"
 
-type MessageType = {
+export type MessageType = {
     id: number
     message: string
 }

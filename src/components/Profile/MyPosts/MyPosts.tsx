@@ -1,13 +1,16 @@
 import React from "react";
 import s from "./MyPosts.module.css"
 import Posts from "./Posts/Posts";
+import {PostsType} from "./Posts/Posts";
+import posts from "./Posts/Posts";
 
-const MyPosts = () => {
+export type PostsProps = {
+    posts: Array<PostsType>
+}
 
-    let postData = [
-        {id: 1, message: "Hi, how are you?", likeCounter: 15},
-        {id: 2, message: "I am dead inside", likeCounter: 25}
-    ]
+const MyPosts: React.FC<PostsProps> = (props) => {
+
+    let postsElements = props.posts.map(p => <Posts message={p.message} likeCounter={p.likeCounter} id={p.id}/>)
 
     return (
             <div className={s.container}>
@@ -20,8 +23,9 @@ const MyPosts = () => {
                 <div className={s.newPosts}>
                     New post
                 </div>
-                <Posts message={postData[0].message} likeCounter={postData[0].likeCounter} id={postData[0].id}/>
-                <Posts message={postData[1].message} likeCounter={postData[1].likeCounter} id={postData[1].id}/>
+                <div className={s.posts}>
+                {postsElements}
+                </div>
             </div>
     );
 }
