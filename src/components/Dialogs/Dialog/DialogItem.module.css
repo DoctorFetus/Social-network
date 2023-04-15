@@ -1,24 +1,18 @@
-.dialogs {
-    display: grid;
-    grid-template-columns: 5fr 10fr;
-    padding: 20px;
+.friendLink {
+    display: flex;
+    color: white;
+    text-decoration: none;
+    align-items: center;
 }
 
-.dialog-items {
-
+.icon {
+   height: 40px;
+    width: 40px;
+    border-radius: 100%;
+    margin-right: 5px;
 }
 
-.active {
-    color: darkcyan;
-}
-
-.dialog {
-
-}
-
-.messages {
-
-}
-
-.message {
+.dialogItem {
+    margin-top: 10px;
+    display: flex;
 }

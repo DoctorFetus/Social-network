@@ -7,17 +7,17 @@ let state = {
     },
     dialogsPage: {
         dialogs: [
-            {id: 1, name: "user1"},
-            {id: 2, name: "user2"},
-            {id: 3, name: "user3"},
-            {id: 4, name: "user4"},
-            {id: 5, name: "user5"}
+            {id: 1, icon: "https://opis-cdn.tinkoffjournal.ru/mercury/359e2657.zw", name: "Sura"},
+            {id: 2, icon: "https://opis-cdn.tinkoffjournal.ru/mercury/359e2657.zw", name: "Asin"},
+            {id: 3, icon: "https://opis-cdn.tinkoffjournal.ru/mercury/359e2657.zw", name: "Gebu"},
+            {id: 4, icon: "https://opis-cdn.tinkoffjournal.ru/mercury/359e2657.zw", name: "Nun"},
+            {id: 5, icon: "https://opis-cdn.tinkoffjournal.ru/mercury/359e2657.zw", name: "Seciro"}
         ],
         messages: [
-            {id: 1, message: "Hi!"},
-            {id: 2, message: "How is your nothing?"},
-            {id: 3, message: "Not bad"},
-            {id: 4, message: "Wow! That is work!"}
+            {id: 1, message: "Hi!", sender: "user"},
+            {id: 2, message: "How is your nothing?", sender: "user"},
+            {id: 3, message: "Not bad", sender: "friend"},
+            {id: 4, message: "Wow! That is work!", sender: "user"}
         ]
     },
     sidebar: {

@@ -1,0 +1,29 @@
+.message {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+.userPosition {
+    align-items: end;
+}
+
+.friendPosition {
+    align-items: start;
+}
+
+.user {
+    display: flex;
+    background-color: lightblue;
+    border-radius: 1em;
+    padding: 0.25em 0.75em;
+    margin-right: 20px;
+}
+
+.friend {
+    display: flex;
+    background-color: #efefef;
+    border-radius: 1em;
+    padding: 0.25em 0.75em;
+    margin-left: 20px;
+}

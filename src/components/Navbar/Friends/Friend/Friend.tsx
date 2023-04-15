@@ -11,7 +11,9 @@ const Friend: React.FC<FriendType> = (props) => {
     return (
         <div>
             <img className={s.icon} src={props.icon} alt="ava"/>
-            {props.name}
+            <div className={s.name}>
+                {props.name}
+            </div>
         </div>
     );
 };

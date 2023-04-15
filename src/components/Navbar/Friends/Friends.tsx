@@ -1,5 +1,6 @@
 import React from 'react';
 import Friend, {FriendType} from "./Friend/Friend";
+import s from "./Friends.module.css"
 
 type FriendsType = {
     friends: Array<FriendType>
@@ -11,8 +12,10 @@ const Friends: React.FC<FriendsType> = (props) => {
 
     return (
         <div>
-            <h3>Friends</h3>
+            <div className={s.title}>Friends</div>
+            <div className={s.wrapper}>
             {friendsElements}
+            </div>
         </div>
     );
 };
