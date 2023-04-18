@@ -15,13 +15,24 @@ const Dialogs: React.FC<DialogsType> = (props) => {
     let dialogElements = props.state.dialogs.map(d => <DialogItem icon={d.icon} name={d.name} id={d.id}/>)
     let messagesElements = props.state.messages.map(m => <Message sender={m.sender} message={m.message} id={m.id}/>)
 
+    let newMessageElement = React.createRef<HTMLTextAreaElement>()
+    const sendMessage = () => {
+        alert(newMessageElement.current?.value)
+    }
+
     return (
         <div className={s.dialogs}>
             <div className={s.dialogs_items}>
                 {dialogElements}
             </div>
             <div className={s.messages}>
-                {messagesElements}
+                <div>
+                    {messagesElements}
+                </div>
+                <div className={s.sender}>
+                    <textarea ref={newMessageElement} className={s.message_area} placeholder={"Type message..."}></textarea>
+                    <button onClick={sendMessage} className={s.btn_send}>Send</button>
+                </div>
             </div>
         </div>
     )

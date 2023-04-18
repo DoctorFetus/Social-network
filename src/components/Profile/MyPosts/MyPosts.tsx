@@ -12,12 +12,18 @@ const MyPosts: React.FC<PostsProps> = (props) => {
 
     let postsElements = props.posts.map(p => <Posts message={p.message} likeCounter={p.likeCounter} id={p.id}/>)
 
+    const newPostElement = React.createRef<HTMLTextAreaElement>()
+
+    const AddPost = () => {
+        alert(newPostElement.current?.value)
+    }
+
     return (
             <div className={s.container}>
                 <h3>My posts</h3>
                 <div>
-                    <textarea></textarea>
-                    <button>Add post</button>
+                    <textarea ref={newPostElement}></textarea>
+                    <button onClick={AddPost}>Add post</button>
                     <button>Remove</button>
                 </div>
                 <div className={s.newPosts}>
