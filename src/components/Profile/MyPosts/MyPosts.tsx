@@ -1,11 +1,10 @@
 import React from "react";
 import s from "./MyPosts.module.css"
-import Posts from "./Posts/Posts";
-import {PostsType} from "./Posts/Posts";
-import posts from "./Posts/Posts";
+import Posts, {PostsType} from "./Posts/Posts";
 
 type PostsProps = {
     posts: Array<PostsType>
+    addPost: (postMessage: string) => void
 }
 
 const MyPosts: React.FC<PostsProps> = (props) => {
@@ -15,7 +14,10 @@ const MyPosts: React.FC<PostsProps> = (props) => {
     const newPostElement = React.createRef<HTMLTextAreaElement>()
 
     const AddPost = () => {
-        alert(newPostElement.current?.value)
+        if (newPostElement.current) {
+            props.addPost(newPostElement.current.value)
+            newPostElement.current.value = ''
+        }
     }
 
     return (

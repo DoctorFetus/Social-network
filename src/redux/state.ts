@@ -1,4 +1,25 @@
-let state = {
+import {PostsType} from "../components/Profile/MyPosts/Posts/Posts";
+import {DialogItemType} from "../components/Dialogs/Dialog/DialogItem";
+import {MessageType} from "../components/Dialogs/Message/Message";
+import {FriendType} from "../components/Navbar/Friends/Friend/Friend";
+import {rerenderEntireTree} from "../render";
+
+export type StateType = {
+    profilePage: {
+        posts: Array<PostsType>
+    },
+    dialogsPage: {
+        dialogs: Array<DialogItemType>
+        messages: Array<MessageType>
+    },
+    sidebar: {
+        friends: Array<FriendType>
+    }
+}
+
+
+
+let state: StateType = {
     profilePage: {
         posts: [
             {id: 1, message: "Hi, how are you?", likeCounter: 15},
@@ -27,8 +48,16 @@ let state = {
             {id: 3, name: "Gebu", icon:"https://pikuco.ru/upload/test_stable/96d/96d01aba12f9a99d9c0362b263d03969.jpg"}
         ]
     }
+}
 
-
+export const addPost = (postMessage: string) => {
+    const newPost: PostsType = {
+        id: 5,
+        message: postMessage,
+        likeCounter: 0
+    }
+    state.profilePage.posts.unshift(newPost)
+    rerenderEntireTree(state)
 }
 
 export default state
