@@ -7,6 +7,7 @@ import {rerenderEntireTree} from "../render";
 export type StateType = {
     profilePage: {
         posts: Array<PostsType>
+        newPostText: string
     },
     dialogsPage: {
         dialogs: Array<DialogItemType>
@@ -24,7 +25,8 @@ let state: StateType = {
         posts: [
             {id: 1, message: "Hi, how are you?", likeCounter: 15},
             {id: 2, message: "I am dead inside", likeCounter: 25}
-        ]
+        ],
+        newPostText: ""
     },
     dialogsPage: {
         dialogs: [
@@ -43,20 +45,26 @@ let state: StateType = {
     },
     sidebar: {
         friends: [
-            {id: 1, name: "Sura", icon:"https://pikuco.ru/upload/test_stable/96d/96d01aba12f9a99d9c0362b263d03969.jpg"},
-            {id: 2, name: "Asin", icon:"https://pikuco.ru/upload/test_stable/96d/96d01aba12f9a99d9c0362b263d03969.jpg"},
-            {id: 3, name: "Gebu", icon:"https://pikuco.ru/upload/test_stable/96d/96d01aba12f9a99d9c0362b263d03969.jpg"}
+            {id: 1, name: "Sura", icon:"https://opis-cdn.tinkoffjournal.ru/mercury/359e2657.zw"},
+            {id: 2, name: "Asin", icon:"https://opis-cdn.tinkoffjournal.ru/mercury/359e2657.zw"},
+            {id: 3, name: "Gebu", icon:"https://opis-cdn.tinkoffjournal.ru/mercury/359e2657.zw" }
         ]
     }
 }
 
-export const addPost = (postMessage: string) => {
+export const addPost = () => {
     const newPost: PostsType = {
         id: 5,
-        message: postMessage,
+        message: state.profilePage.newPostText,
         likeCounter: 0
     }
     state.profilePage.posts.unshift(newPost)
+    state.profilePage.newPostText = ""
+    rerenderEntireTree(state)
+}
+
+export const updateNewPostText = (newText: string) => {
+    state.profilePage.newPostText = newText
     rerenderEntireTree(state)
 }
 
