@@ -1,23 +1,31 @@
-import React from "react"
+import React, {ChangeEvent} from "react"
 import s from "./Dialogs.module.css"
 import DialogItem, {DialogItemType} from "./Dialog/DialogItem";
 import Message, {MessageType} from "./Message/Message";
+import {StoreType} from "../../redux/state";
 
 type DialogsType = {
-    state: {
+    dialogsPage: {
         dialogs: Array<DialogItemType>,
         messages: Array<MessageType>
+        newMessageText: string
     }
+    store: StoreType
 }
 
 const Dialogs: React.FC<DialogsType> = (props) => {
 
-    let dialogElements = props.state.dialogs.map(d => <DialogItem icon={d.icon} name={d.name} id={d.id}/>)
-    let messagesElements = props.state.messages.map(m => <Message sender={m.sender} message={m.message} id={m.id}/>)
+    let dialogElements = props.dialogsPage.dialogs.map(d => <DialogItem icon={d.icon} name={d.name} id={d.id}/>)
+    let messagesElements = props.dialogsPage.messages.map(m => <Message sender={m.sender} message={m.message}
+                                                                        id={m.id}/>)
 
     let newMessageElement = React.createRef<HTMLTextAreaElement>()
     const sendMessage = () => {
-        alert(newMessageElement.current?.value)
+        props.store.addMessage()
+    }
+
+    const changeMessageText = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        props.store.updateNewMessageText(e.currentTarget.value)
     }
 
     return (
@@ -30,8 +38,16 @@ const Dialogs: React.FC<DialogsType> = (props) => {
                     {messagesElements}
                 </div>
                 <div className={s.sender}>
-                    <textarea ref={newMessageElement} className={s.message_area} placeholder={"Type message..."}></textarea>
-                    <button onClick={sendMessage} className={s.btn_send}>Send</button>
+                    <textarea ref={newMessageElement}
+                              className={s.message_area}
+                              placeholder={"Type message..."}
+                              value={props.dialogsPage.newMessageText}
+                              onChange={changeMessageText}
+                    />
+                    <button
+                        onClick={sendMessage}
+                        className={s.btn_send}>Send
+                    </button>
                 </div>
             </div>
         </div>
