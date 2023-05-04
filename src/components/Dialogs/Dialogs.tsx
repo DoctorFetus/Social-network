@@ -2,7 +2,7 @@ import React, {ChangeEvent} from "react"
 import s from "./Dialogs.module.css"
 import DialogItem, {DialogItemType} from "./Dialog/DialogItem";
 import Message, {MessageType} from "./Message/Message";
-import {StoreType} from "../../redux/state";
+import {ActionTypes, addMessageActionCreator, updateMessageTextActionCreator} from "../../redux/state";
 
 type DialogsType = {
     dialogsPage: {
@@ -10,7 +10,7 @@ type DialogsType = {
         messages: Array<MessageType>
         newMessageText: string
     }
-    store: StoreType
+    dispatch: (action: ActionTypes) => void
 }
 
 const Dialogs: React.FC<DialogsType> = (props) => {
@@ -21,11 +21,13 @@ const Dialogs: React.FC<DialogsType> = (props) => {
 
     let newMessageElement = React.createRef<HTMLTextAreaElement>()
     const sendMessage = () => {
-        props.store.addMessage()
+        const action = addMessageActionCreator()
+        props.dispatch(action)
     }
 
     const changeMessageText = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.store.updateNewMessageText(e.currentTarget.value)
+        const action = updateMessageTextActionCreator(e.currentTarget.value)
+        props.dispatch(action)
     }
 
     return (
