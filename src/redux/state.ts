@@ -6,7 +6,7 @@ import {FriendType} from "../components/Navbar/Friends/Friend/Friend";
 const ADD_POST = "ADD-POST"
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT"
 const ADD_MESSAGE = "ADD-MESSAGE"
-const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT"
+const UPDATE_NEW_MESSAGE_BODY = "UPDATE-NEW-MESSAGE-BODY"
 
 
 export type StateType = {
@@ -36,8 +36,8 @@ export type StateType = {
     type: "ADD-MESSAGE",
 }
  type UpdateMessageTextActionType = {
-    type: "UPDATE-NEW-MESSAGE-TEXT",
-    newText: string
+    type: "UPDATE-NEW-MESSAGE-BODY",
+    newMessageText: string
 }
 
 export type ActionTypes = AddPostActionType | UpdateNewPostTextActionType | AddMessageActionType | UpdateMessageTextActionType
@@ -120,8 +120,8 @@ export const store: StoreType = {
                 this._state.dialogsPage.newMessageText = ""
                 this._callSubscriber()
                 break
-            case UPDATE_NEW_MESSAGE_TEXT:
-                this._state.dialogsPage.newMessageText = action.newText
+            case UPDATE_NEW_MESSAGE_BODY:
+                this._state.dialogsPage.newMessageText = action.newMessageText
                 this._callSubscriber()
                 break
         }
@@ -129,13 +129,13 @@ export const store: StoreType = {
     }
 }
 
-export const addPostActionCreator = (): AddPostActionType => ({type: ADD_POST})
-export const updatePostTextActionCreator = (text: string): UpdateNewPostTextActionType => (
+export const addPostCreator = (): AddPostActionType => ({type: ADD_POST})
+export const updatePostTextCreator = (text: string): UpdateNewPostTextActionType => (
     {type: UPDATE_NEW_POST_TEXT, newText: text})
-export const addMessageActionCreator = (): AddMessageActionType => (
+export const sendMessageCreator = (): AddMessageActionType => (
     {type: ADD_MESSAGE})
-export const updateMessageTextActionCreator = (text: string): UpdateMessageTextActionType => (
-    {type: UPDATE_NEW_MESSAGE_TEXT, newText: text})
+export const updateMessageBodyCreator = (text: string): UpdateMessageTextActionType => (
+    {type: UPDATE_NEW_MESSAGE_BODY, newMessageText: text})
 
 
 
