@@ -19,4 +19,6 @@ const reducers = combineReducers({
 
 const store: Store<StateType, ActionsType> = createStore(reducers)
 
+export type StoreType = typeof store
+
 export default store
