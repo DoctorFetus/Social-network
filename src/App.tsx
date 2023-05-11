@@ -7,12 +7,13 @@ import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
+import Navbar from "./components/Navbar/Navbar";
 
 const App = () => {
     return (
         <div className="app_wrapper">
             <Header/>
-            {/*<Navbar state={props.state.sidebar}/>*/}
+            <Navbar/>
             <div className="app_wrapper_content">
                 <Route path="/profile" render={() => <Profile/>}/>
 

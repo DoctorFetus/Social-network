@@ -6,7 +6,8 @@ import StoreContext from "../../StoreContext";
 const DialogsContainer = () => {
 
     return <StoreContext.Consumer>
-        {(store) => {
+        {
+            (store) => {
             const sendMessageClick = () => {
                 const action = sendMessageCreator()
                 store?.dispatch(action)
