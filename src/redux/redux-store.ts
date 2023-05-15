@@ -11,6 +11,8 @@ export type StateType = {
 
 export type ActionsType = ProfilePageActionType | DialogsPageActionType
 
+export type StoreType = typeof store
+
 const reducers = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
@@ -18,7 +20,5 @@ const reducers = combineReducers({
 })
 
 const store: Store<StateType, ActionsType> = createStore(reducers)
-
-export type StoreType = typeof store
 
 export default store

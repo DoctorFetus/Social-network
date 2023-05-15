@@ -22,12 +22,12 @@ function profileReducer(state = initialState, action: ProfilePageActionType): Pr
                 message: state.newPostText,
                 likeCounter: 0
             }
-            state.posts.unshift(newPost)
-            state.newPostText = ""
-            return state
+            return state.newPostText
+                ? {...state, newPostText: "", posts: [newPost, ...state.posts]}
+                : state
         case "UPDATE-NEW-POST-TEXT":
             state.newPostText = action.newText
-            return state
+            return {...state, newPostText: action.newText}
         default:
             return state
     }

@@ -1,17 +1,11 @@
 import React, {ChangeEvent} from "react";
 import s from "./MyPosts.module.css"
-import Posts, {PostsType} from "./Posts/Posts";
+import Posts from "./Posts/Posts";
+import {MypPostsPropsType} from "./MyPostsContainer";
 
-type PostsProps = {
-    posts: Array<PostsType>
-    updateNewPostText: (newText:string) => void
-    addPost: () => void
-    newPostText: string
-}
+const MyPosts: React.FC<MypPostsPropsType> = (props) => {
 
-const MyPosts: React.FC<PostsProps> = (props) => {
-
-    let postsElements = props.posts.map(p => <Posts message={p.message} likeCounter={p.likeCounter} id={p.id}/>)
+    let postsElements = props.posts.map(p => <Posts key={p.id} message={p.message} likeCounter={p.likeCounter} id={p.id}/>)
 
     const newPostElement = React.createRef<HTMLTextAreaElement>()
 

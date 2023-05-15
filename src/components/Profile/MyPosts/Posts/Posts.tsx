@@ -12,7 +12,7 @@ const Posts: React.FC<PostsType> = (props) => {
     return (
         <div className={s.item}>
             <img
-                src="https://gas-kvas.com/uploads/posts/2023-01/1673412247_gas-kvas-com-p-kvadratnie-risunki-anime-1.jpg"
+                src="https://u.kanobu.ru/editor/images/48/a2bc4eea-3344-45d1-bf53-4e6d4629576b.webp"
                 alt="avatar"/>
             {props.message}
             <div>

@@ -1,14 +1,12 @@
 import React from 'react';
-import Friend, {FriendType} from "./Friend/Friend";
+import Friend from "./Friend/Friend";
 import s from "./Friends.module.css"
+import {FriendsPropsType} from "./FriendsContainer";
 
-type FriendsType = {
-    friends: Array<FriendType>
-}
 
-const Friends: React.FC<FriendsType> = (props) => {
+const Friends: React.FC<FriendsPropsType> = (props) => {
 
-    const friendsElements = props.friends.map(f => <Friend id={f.id} name={f.name} icon={f.icon}/>)
+    const friendsElements = props.friends.map(f => <Friend key={f.id} id={f.id} name={f.name} icon={f.icon}/>)
 
     return (
         <div>

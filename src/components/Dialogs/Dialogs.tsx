@@ -1,23 +1,14 @@
 import React, {ChangeEvent} from "react"
 import s from "./Dialogs.module.css"
-import DialogItem, {DialogItemType} from "./Dialog/DialogItem";
-import Message, {MessageType} from "./Message/Message";
+import DialogItem from "./Dialog/DialogItem";
+import Message from "./Message/Message";
+import {DialogsPropsType} from "./DialogsContainer";
 
-type DialogsType = {
-    dialogsPage: {
-        dialogs: Array<DialogItemType>,
-        messages: Array<MessageType>
-        newMessageText: string
-    },
-    updateNewMessageBody: (newBody: string) => void,
-    sendMessage: () => void
 
-}
+const Dialogs: React.FC<DialogsPropsType> = (props) => {
 
-const Dialogs: React.FC<DialogsType> = (props) => {
-
-    let dialogElements = props.dialogsPage.dialogs.map(d => <DialogItem icon={d.icon} name={d.name} id={d.id}/>)
-    let messagesElements = props.dialogsPage.messages.map(m => <Message sender={m.sender} message={m.message}
+    let dialogElements = props.dialogs.map(d => <DialogItem key={d.id} icon={d.icon} name={d.name} id={d.id}/>)
+    let messagesElements = props.messages.map(m => <Message key={m.id} sender={m.sender} message={m.message}
                                                                         id={m.id}/>)
 
     let newMessageElement = React.createRef<HTMLTextAreaElement>()
@@ -26,7 +17,7 @@ const Dialogs: React.FC<DialogsType> = (props) => {
     }
 
     const changeMessageText = (e: ChangeEvent<HTMLTextAreaElement>) => {
-       props.updateNewMessageBody(e.currentTarget.value)
+        props.updateNewMessageBody(e.currentTarget.value)
     }
 
     return (
@@ -42,7 +33,7 @@ const Dialogs: React.FC<DialogsType> = (props) => {
                     <textarea ref={newMessageElement}
                               className={s.message_area}
                               placeholder={"Type message..."}
-                              value={props.dialogsPage.newMessageText}
+                              value={props.newMessageText}
                               onChange={changeMessageText}
                     />
                     <button
