@@ -1,11 +1,13 @@
-
 export type UserType = {
-    id: number,
-    fullName: string,
+    name: string
+    id: number
+    uniqueUrlName: null
     status: string,
     followed: boolean,
-    location: {city: string, country: string}
-    icon: string
+    photos: {
+        small: string
+        large: string
+    }
 }
 
 export type UsersPageType = typeof initialState
@@ -14,16 +16,20 @@ const initialState = {
     users: [] as Array<UserType>
 }
 
- const usersReducer = (state = initialState, action: UserReducerActionType): UsersPageType => {
+const usersReducer = (state = initialState, action: UserReducerActionType): UsersPageType => {
     switch (action.type) {
         case "FOLLOW":
-            return {...state, users: state.users.map(user => user.id === action.payload.userID
-                ? {...user, followed: true}
-                : user)}
+            return {
+                ...state, users: state.users.map(user => user.id === action.payload.userID
+                    ? {...user, followed: true}
+                    : user)
+            }
         case "UNFOLLOW":
-            return {...state, users: state.users.map(user => user.id === action.payload.userID
+            return {
+                ...state, users: state.users.map(user => user.id === action.payload.userID
                     ? {...user, followed: false}
-                    : user)}
+                    : user)
+            }
         case "SET-USERS":
             return {...state, users: [...state.users, ...action.payload.users]}
         default:
