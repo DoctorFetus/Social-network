@@ -5,26 +5,23 @@ import axios, {AxiosResponse} from 'axios'
 import {UserType} from "../../redux/redusers/users-reducer";
 import userPhoto from "../../assets/userPhoto.jpg"
 
-const Users = (props: UsersPropsType) => {
+class Users extends React.Component<UsersPropsType, {}> {
 
-    const getUsers = () => {
-        if (!props.users.length) {
-            axios.get<Array<UserType>>("https://social-network.samuraijs.com/api/1.0/users?count=4")
-                .then((response: AxiosResponse) => {
-                    props.setUsers(response.data.items)
-                })
-        }
+    componentDidMount() {
+        axios.get<Array<UserType>>("https://social-network.samuraijs.com/api/1.0/users?count=1")
+            .then((response: AxiosResponse) => {
+                this.props.setUsers(response.data.items)
+            })
     }
 
-    return (
-        <div>
-            <button onClick={getUsers}>GET USERS</button>
-            {props.users.map(user => <div key={user.id} className={s.container}>
+    render() {
+        return <div>
+            {this.props.users.map(user => <div key={user.id} className={s.container}>
                 <div className={s.ava_btn}>
                     <img className={s.avatar} src={user.photos.small ? user.photos.small : userPhoto} alt="avatar"/>
                     {user.followed
-                        ? <button className={s.btn} onClick={() => props.unfollowUser(user.id)}>unfollow</button>
-                        : <button className={s.btn} onClick={() => props.followUser(user.id)}>follow</button>}
+                        ? <button className={s.btn} onClick={() => this.props.unfollowUser(user.id)}>unfollow</button>
+                        : <button className={s.btn} onClick={() => this.props.followUser(user.id)}>follow</button>}
                 </div>
                 <div className={s.userInfo}>
                     <div className={s.name_status}>
@@ -38,7 +35,7 @@ const Users = (props: UsersPropsType) => {
                 </div>
             </div>)}
         </div>
-    );
-};
+    }
+}
 
 export default Users;

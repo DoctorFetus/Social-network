@@ -1,8 +1,8 @@
 import {connect} from "react-redux";
-import Users from "./Users";
 import {StateType} from "../../redux/redux-store";
-import {setUsersAC, followUserAC, UsersPageType, UserType, unfollowUserAC} from "../../redux/redusers/users-reducer";
+import {followUserAC, setUsersAC, unfollowUserAC, UsersPageType, UserType} from "../../redux/redusers/users-reducer";
 import {Dispatch} from "redux";
+import Users from "./Users";
 
 type mapStateToPropsType = UsersPageType
 type mapDispatchToPropsType = {
