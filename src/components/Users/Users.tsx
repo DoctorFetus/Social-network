@@ -1,27 +1,25 @@
 import React from 'react';
+import s from "./Users.module.css";
+import userPhoto from "../../assets/userPhoto.jpg";
 import {UsersPropsType} from "./UsersContainer";
-import s from './Users.module.css'
-import axios, {AxiosResponse} from 'axios'
-import {UserType} from "../../redux/redusers/users-reducer";
-import userPhoto from "../../assets/userPhoto.jpg"
 
-class Users extends React.Component<UsersPropsType, {}> {
+const Users = (props: UsersPropsType & { onPageChanged: (page: number) => void }) => {
 
-    componentDidMount() {
-        axios.get<Array<UserType>>("https://social-network.samuraijs.com/api/1.0/users?count=1")
-            .then((response: AxiosResponse) => {
-                this.props.setUsers(response.data.items)
-            })
+    const pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
+    const pages = []
+    for (let i = 1; i <= pagesCount; i++) {
+        pages.push(i)
     }
 
-    render() {
-        return <div>
-            {this.props.users.map(user => <div key={user.id} className={s.container}>
+    return (
+        <div>
+
+            {props.users.map(user => <div key={user.id} className={s.container}>
                 <div className={s.ava_btn}>
                     <img className={s.avatar} src={user.photos.small ? user.photos.small : userPhoto} alt="avatar"/>
                     {user.followed
-                        ? <button className={s.btn} onClick={() => this.props.unfollowUser(user.id)}>unfollow</button>
-                        : <button className={s.btn} onClick={() => this.props.followUser(user.id)}>follow</button>}
+                        ? <button className={s.btn} onClick={() => props.unfollowUser(user.id)}>unfollow</button>
+                        : <button className={s.btn} onClick={() => props.followUser(user.id)}>follow</button>}
                 </div>
                 <div className={s.userInfo}>
                     <div className={s.name_status}>
@@ -34,8 +32,17 @@ class Users extends React.Component<UsersPropsType, {}> {
                     </div>
                 </div>
             </div>)}
-        </div>
-    }
+            <div className={s.pagesContainer}>
+                {pages.map(page => {
+                    if (page <= 10) {
+                        return <span
+                            className={props.currentPage === page ? `${s.pageSelector} ${s.activePage}` : s.pageSelector}
+                            onClick={() => props.onPageChanged(page)}
+                        >{page}</span>
+                    }
+                })}
+            </div>
+        </div>)
 }
 
 export default Users;
