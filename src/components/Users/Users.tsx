@@ -1,6 +1,6 @@
 import React from 'react';
 import s from "./Users.module.css";
-import userPhoto from "../../assets/userPhoto.jpg";
+import userPhoto from "../../assets/images/userPhoto.jpg";
 import {UsersPropsType} from "./UsersContainer";
 
 const Users = (props: UsersPropsType & { onPageChanged: (page: number) => void }) => {
@@ -36,6 +36,7 @@ const Users = (props: UsersPropsType & { onPageChanged: (page: number) => void }
                 {pages.map(page => {
                     if (page <= 10) {
                         return <span
+                            key={page}
                             className={props.currentPage === page ? `${s.pageSelector} ${s.activePage}` : s.pageSelector}
                             onClick={() => props.onPageChanged(page)}
                         >{page}</span>
