@@ -24,4 +24,9 @@ const reducers = combineReducers({
 
 const store: Store<StateType, ActionsType> = createStore(reducers)
 
+
+// @ts-ignore
+window.state = store.getState()
+
+
 export default store

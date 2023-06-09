@@ -6,7 +6,7 @@ import {StateType} from "../../../redux/redux-store";
 import {Dispatch} from "redux";
 
 
-type mapStateToPropsType = ProfilePageType
+type mapStateToPropsType = Omit<ProfilePageType, "profile">
 type mapDispatchToPropsType = {
     updateNewPostText: (newText:string) => void
     addPost: () => void
