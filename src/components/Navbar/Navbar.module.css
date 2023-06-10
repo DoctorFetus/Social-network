@@ -1,7 +1,8 @@
 .nav {
     grid-area: navigation;
-    background: skyblue;
+    background: linear-gradient(45deg, rgb(255, 255, 255), rgb(10, 112, 230));
     padding: 20px;
+    min-height: 86vh;
 }
 
 .item {
@@ -10,5 +11,5 @@
 }
 
 .active {
-    color: darkcyan;
+    color: black;
 }

@@ -5,6 +5,7 @@ export type UserProfileType = {
     lookingForAJob: boolean
     lookingForAJobDescription: string
     fullName: string
+    aboutMe: string
     contacts: {
         github: string
         vk: string
@@ -14,6 +15,10 @@ export type UserProfileType = {
         website: string
         youtube: string
         mainLink: string
+    }
+    photos: {
+        small: string
+        large: string
     }
 }
 

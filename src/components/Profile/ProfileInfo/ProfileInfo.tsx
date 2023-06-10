@@ -13,17 +13,15 @@ const ProfileInfo = (props:  ProfileInfoType) => {
             return <Preloader />
         }
     console.log(props.profile)
-        return <div>
-            <div className={s.content}>
-                <img src="https://i.pinimg.com/originals/8b/93/0a/8b930aa82d8528c370b28718c52461eb.jpg"
-                     alt="status_bg"/>
-            </div>
-            <div className={s.info}>
+        return <div className={s.container}>
+            <div className={s.name}>
                 {props.profile
                     ? props.profile.fullName
                     : "Mikhal Palkin"
                 }
             </div>
+            <div>{props.profile.aboutMe}</div>
+            <div>Looking for job: {props.profile.lookingForAJob ? "YES" : "NO"}</div>
         </div>
 }
 

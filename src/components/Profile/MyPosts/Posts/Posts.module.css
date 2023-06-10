@@ -1,9 +1,22 @@
+.container {
+    margin-top: 10px;
+}
+
 .item {
     color: black;
+    display: flex;
+    align-items: center;
+    gap: 20px;
 }
 
 .item img {
     width: 50px;
     height: 50px;
     border-radius: 100%;
+}
+
+.postText {
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 10px;
 }

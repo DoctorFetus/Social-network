@@ -1,9 +1,9 @@
-.content img {
-    height: 500px;
-    width: 1000px;
+.container {
+    padding: 10px 40px;
+    margin-top: 75px;
 }
 
-.info {
-    padding: 10px;
+.name {
+    font-size: 25px;
+    font-weight: 500;
 }
-

@@ -5,7 +5,7 @@ import {MypPostsPropsType} from "./MyPostsContainer";
 
 const MyPosts: React.FC<MypPostsPropsType> = (props) => {
 
-    let postsElements = props.posts.map(p => <Posts key={p.id} message={p.message} likeCounter={p.likeCounter} id={p.id}/>)
+    let postsElements = props.posts.map(p => <Posts profile={props.profile} key={p.id} message={p.message} likeCounter={p.likeCounter} id={p.id}/>)
 
     const newPostElement = React.createRef<HTMLTextAreaElement>()
 
@@ -19,14 +19,10 @@ const MyPosts: React.FC<MypPostsPropsType> = (props) => {
 
     return (
             <div className={s.container}>
-                <h3>My posts</h3>
-                <div>
-                    <textarea ref={newPostElement} onChange={changeText} value={props.newPostText}/>
+                <h3 className={s.title}>Posts</h3>
+                <div className={s.addNewPost}>
+                    <textarea placeholder={"What are you thinking about?"} ref={newPostElement} onChange={changeText} value={props.newPostText}/>
                     <button onClick={AddPost}>Add post</button>
-                    <button>Remove</button>
-                </div>
-                <div className={s.newPosts}>
-                    New post
                 </div>
                 <div className={s.posts}>
                 {postsElements}

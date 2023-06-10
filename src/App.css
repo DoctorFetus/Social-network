@@ -7,7 +7,7 @@
     "head head"
     "navigation content";
 
-    grid-template-rows: 60px 1fr;
+    grid-template-rows: 70px 1fr;
     grid-template-columns: 2fr 10fr;
     /*grid-gap: 10px;*/
 }
@@ -15,6 +15,6 @@
 
 .app_wrapper_content {
     grid-area: content;
-    background: deepskyblue;
+    background: linear-gradient(0deg, rgb(255, 255, 255), rgb(10, 112, 230));
 }
 

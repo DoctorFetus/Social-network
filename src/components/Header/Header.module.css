@@ -1,9 +1,12 @@
 .header {
     grid-area: head;
-    background: aquamarine;
+    background: linear-gradient(180deg, #c2f9e2,#00c4fd);
 }
 
-.header img {
-    width: 70px;
-    height: 70px;
+.logo {
+    height: 50px;
+    width: auto;
+    margin-left: 30px;
+    margin-top: 10px;
+    /*fill: #ff0000; !* красный цвет *!*/
 }

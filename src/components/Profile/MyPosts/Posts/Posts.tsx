@@ -1,6 +1,7 @@
 import React from "react";
 import s from "./Posts.module.css"
-
+import {UserProfileType} from "../../../../redux/redusers/profile-reducer";
+import userPhoto from "../../../../assets/images/userPhoto.jpg"
 
 export type PostsType = {
     id: number,
@@ -8,15 +9,20 @@ export type PostsType = {
     likeCounter: number
 }
 
-const Posts: React.FC<PostsType> = (props) => {
+const Posts = (props: PostsType &  {profile: UserProfileType | null}) => {
     return (
-        <div className={s.item}>
-            <img
-                src="https://u.kanobu.ru/editor/images/48/a2bc4eea-3344-45d1-bf53-4e6d4629576b.webp"
-                alt="avatar"/>
-            {props.message}
+        <div className={s.container}>
+
+            <div className={s.item}>
+                {props.profile?.photos
+                    ? <img src={userPhoto} alt={"avatar"}/>
+                    : <img src={userPhoto} alt={"avatar"} /> }
+                <div className={s.postText}>
+                    {props.message}
+                </div>
+            </div>
             <div>
-                <span>Like! {props.likeCounter}</span>
+                <span>❤ {props.likeCounter}</span>
             </div>
         </div>
     );

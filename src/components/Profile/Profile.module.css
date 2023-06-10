@@ -1,4 +1,24 @@
-.content img {
-    height: 500px;
+.content {
+    position: relative;
+    /*margin-bottom: 75px;*/
+}
+
+.wallpaper {
+    height: 250px;
     width: 1000px;
+    object-fit: cover;
+}
+
+.avatar {
+    position: absolute;
+    left: 50px;
+    top: 170px;
+    border-radius: 50%;
+    height: 150px;
+    width: auto;
+    border: 4px white solid;
+}
+
+.blocks {
+    display: flex;
 }
