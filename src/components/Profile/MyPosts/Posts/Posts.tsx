@@ -14,8 +14,8 @@ const Posts = (props: PostsType &  {profile: UserProfileType | null}) => {
         <div className={s.container}>
 
             <div className={s.item}>
-                {props.profile?.photos
-                    ? <img src={userPhoto} alt={"avatar"}/>
+                {props.profile?.photos.large
+                    ? <img src={props.profile.photos.large} alt={"avatar"}/>
                     : <img src={userPhoto} alt={"avatar"} /> }
                 <div className={s.postText}>
                     {props.message}

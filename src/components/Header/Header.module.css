@@ -1,12 +1,18 @@
 .header {
     grid-area: head;
     background: linear-gradient(180deg, #c2f9e2,#00c4fd);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;
 }
 
 .logo {
     height: 50px;
     width: auto;
-    margin-left: 30px;
-    margin-top: 10px;
-    /*fill: #ff0000; !* красный цвет *!*/
+}
+
+.login {
+    color: black;
+    text-decoration: none;
 }

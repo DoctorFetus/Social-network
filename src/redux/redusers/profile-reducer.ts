@@ -54,7 +54,6 @@ function profileReducer(state = initialState, action: ProfilePageActionType): Pr
             state.newPostText = action.newText
             return {...state, newPostText: action.newText}
         case "SET-USER-PROFILE":
-            console.log(action.payload.profile)
             return {...state, profile: action.payload.profile}
         default:
             return state

@@ -17,7 +17,7 @@ const Profile = (props: any) => {
             <div className={s.content}>
                 <img className={s.wallpaper} src={profileWallpaper}
                      alt="status_bg"/>
-                {!props
+                {props.profile.photos.large
                     ? <img className={s.avatar} src={props.profile.photos.large} alt={"avatar"} />
                     : <img className={s.avatar} src={userPhoto} alt={"avatar"} />
                 }

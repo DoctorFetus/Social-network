@@ -12,10 +12,9 @@ const ProfileInfo = (props:  ProfileInfoType) => {
         if (!props.profile) {
             return <Preloader />
         }
-    console.log(props.profile)
         return <div className={s.container}>
             <div className={s.name}>
-                {props.profile
+                {props.profile.photos
                     ? props.profile.fullName
                     : "Mikhal Palkin"
                 }
