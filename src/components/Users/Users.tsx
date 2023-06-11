@@ -3,6 +3,7 @@ import s from "./Users.module.css";
 import userPhoto from "../../assets/images/userPhoto.jpg";
 import {UsersPropsType} from "./UsersContainer";
 import {NavLink} from "react-router-dom";
+import {usersAPI} from "../../api/api";
 
 const Users = (props: UsersPropsType & { onPageChanged: (page: number) => void }) => {
 
@@ -18,11 +19,29 @@ const Users = (props: UsersPropsType & { onPageChanged: (page: number) => void }
             {props.users.map(user => <div key={user.id} className={s.container}>
                 <div className={s.ava_btn}>
                     <NavLink to={"/profile/" + user.id}>
-                    <img className={s.avatar} src={user.photos.small ? user.photos.small : userPhoto} alt="avatar"/>
+                        <img className={s.avatar} src={user.photos.small ? user.photos.small : userPhoto} alt="avatar"/>
                     </NavLink>
                     {user.followed
-                        ? <button className={s.btn} onClick={() => props.unfollowUser(user.id)}>unfollow</button>
-                        : <button className={s.btn} onClick={() => props.followUser(user.id)}>follow</button>}
+                        ? <button className={s.btn} onClick={() => {
+
+                            usersAPI.unfollowUser(user.id)
+                                .then(response => {
+                                if (!response.resultCode) {
+                                    props.unfollowUser(user.id)
+                                }
+                            })
+
+                        }}>unfollow</button>
+                        : <button className={s.btn} onClick={() =>{
+
+                            usersAPI.followUser(user.id)
+                                .then(response => {
+                                if (!response.resultCode) {
+                                    props.followUser(user.id)
+                                }
+                            })}
+
+                        }>follow</button>}
                 </div>
                 <div className={s.userInfo}>
                     <div className={s.name_status}>

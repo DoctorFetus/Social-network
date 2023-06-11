@@ -5,6 +5,7 @@ import {setUserProfile, UserProfileType} from "../../redux/redusers/profile-redu
 import {connect} from "react-redux";
 import {StateType} from "../../redux/redux-store";
 import {RouteComponentProps, withRouter} from "react-router-dom";
+import {usersAPI} from "../../api/api";
 
 type MapStateToPropsType = {
     profile: UserProfileType | null
@@ -28,10 +29,9 @@ class ProfileContainer extends React.Component<ProfileProps> {
         let userID = this.props.match.params.userId
 
         if (!userID) {
-            userID = "2"
+            userID = "29052"
         }
-
-        axios.get<UserProfileType>("https://social-network.samuraijs.com/api/1.0/profile/" + userID)
+        usersAPI.getProfile(userID)
             .then(response => {
                 this.props.setUserProfile(response.data)
             })
