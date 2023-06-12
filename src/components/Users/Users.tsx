@@ -12,7 +12,7 @@ const Users = (props: UsersPropsType & { onPageChanged: (page: number) => void }
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i)
     }
-
+    debugger
     return (
         <div>
 
@@ -22,23 +22,25 @@ const Users = (props: UsersPropsType & { onPageChanged: (page: number) => void }
                         <img className={s.avatar} src={user.photos.small ? user.photos.small : userPhoto} alt="avatar"/>
                     </NavLink>
                     {user.followed
-                        ? <button className={s.btn} onClick={() => {
-
+                        ? <button className={s.btn} disabled={props.followingFilter.some(id => user.id == id)} onClick={() => {
+                            props.toggleIsFollowing(user.id, true)
                             usersAPI.unfollowUser(user.id)
                                 .then(response => {
                                 if (!response.resultCode) {
                                     props.unfollowUser(user.id)
                                 }
+                                    props.toggleIsFollowing(user.id, false)
                             })
 
                         }}>unfollow</button>
-                        : <button className={s.btn} onClick={() =>{
-
+                        : <button className={s.btn} disabled={props.followingFilter.some(id => user.id == id)} onClick={() =>{
+                            props.toggleIsFollowing(user.id, true)
                             usersAPI.followUser(user.id)
                                 .then(response => {
                                 if (!response.resultCode) {
                                     props.followUser(user.id)
                                 }
+                                props.toggleIsFollowing(user.id, false)
                             })}
 
                         }>follow</button>}

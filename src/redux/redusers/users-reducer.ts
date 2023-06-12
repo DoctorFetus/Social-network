@@ -17,7 +17,8 @@ const initialState = {
     pageSize: 3,
     totalUsersCount: 0,
     currentPage: 1,
-    isFetching: true
+    isFetching: false,
+    followingFilter: [] as Array<number>
 }
 
 const usersReducer = (state = initialState, action: UserReducerActionType): UsersPageType => {
@@ -42,6 +43,10 @@ const usersReducer = (state = initialState, action: UserReducerActionType): User
             return {...state, totalUsersCount: action.payload.usersCount}
         case "TOGGLE-IS-FETCHING":
             return {...state, isFetching: action.payload.isFetching}
+        case "TOGGLE-IS-FOLLOWING":
+            return action.payload.isFollowing
+                ? {...state, followingFilter: [...state.followingFilter, action.payload.userID]}
+                : {...state, followingFilter: state.followingFilter.filter(id => action.payload.userID !== id)}
         default:
             return state
     }
@@ -49,7 +54,7 @@ const usersReducer = (state = initialState, action: UserReducerActionType): User
 
 export type UserReducerActionType =
     FollowUserType | SetUsersType | UnfollowUserType
-    | SetCurrentPageType | SetTotalUsersCountType | ToggleIsFetchingType
+    | SetCurrentPageType | SetTotalUsersCountType | ToggleIsFetchingType | ToggleIsFollowingType
 
 type FollowUserType = ReturnType<typeof followUser>
 export const followUser = (userID: number) => {
@@ -96,5 +101,13 @@ export const toggleIsFetching = (isFetching: boolean) => {
     return {
         type: "TOGGLE-IS-FETCHING",
         payload: {isFetching}
+    } as const
+}
+
+type ToggleIsFollowingType = ReturnType<typeof toggleIsFollowing>
+export const toggleIsFollowing = (userID: number, isFollowing: boolean) => {
+    return {
+        type: "TOGGLE-IS-FOLLOWING",
+        payload: {userID, isFollowing}
     } as const
 }
