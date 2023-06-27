@@ -1,3 +1,6 @@
+import {Dispatch} from "redux";
+import {usersAPI} from "../../api/api";
+
 export type UserType = {
     name: string
     id: number
@@ -79,9 +82,6 @@ export const setUsers = (users: Array<UserType>) => {
         payload: {users}
     } as const
 }
-
-export default usersReducer
-
 type SetCurrentPageType = ReturnType<typeof setCurrentPage>
 export const setCurrentPage = (currentPage: number) => {
     return {
@@ -111,3 +111,39 @@ export const toggleIsFollowing = (userID: number, isFollowing: boolean) => {
         payload: {userID, isFollowing}
     } as const
 }
+
+export const getUsers = (currentPage: number, pageSize: number) => (dispatch: Dispatch) => {
+    dispatch(toggleIsFetching(true))
+    usersAPI.getUsers(currentPage, pageSize)
+        .then((response) => {
+            dispatch(setCurrentPage(currentPage))
+            dispatch(setUsers(response.items))
+            dispatch(setTotalUsersCount(response.totalCount))
+            dispatch(toggleIsFetching(false))
+        })
+}
+
+export const acceptFollowUser = (userId: number) => (dispatch: Dispatch) => {
+    dispatch(toggleIsFollowing(userId, true))
+    usersAPI.followUser(userId)
+        .then(response => {
+            if (!response.resultCode) {
+                dispatch(followUser(userId))
+            }
+            dispatch(toggleIsFollowing(userId, false))
+        })
+}
+
+export const acceptUnfollowUser = (userId: number) => (dispatch: Dispatch) => {
+    dispatch(toggleIsFollowing(userId, true))
+    usersAPI.unfollowUser(userId)
+        .then(response => {
+            if (!response.resultCode) {
+                dispatch(unfollowUser(userId))
+            }
+            dispatch(toggleIsFollowing(userId, false))
+        })
+}
+
+
+export default usersReducer
