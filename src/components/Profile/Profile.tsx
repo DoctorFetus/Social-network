@@ -5,17 +5,13 @@ import s from "./Profile.module.css"
 import profileWallpaper from "../../assets/images/profileWallpaper.jpg";
 import userPhoto from "../../assets/images/userPhoto.jpg";
 import Preloader from "../common/Preloader/Preloader";
-import {Redirect} from "react-router-dom";
 
 
 const Profile = (props: any) => {
+
     if (!props.profile) {
         return <Preloader />
     }
-
-    console.log(props.isAuth)
-
-    if (!props.isAuth) return <Redirect to={"/login"}/>
 
     return (
         <div>
