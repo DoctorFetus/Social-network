@@ -5,9 +5,10 @@ import s from "./Profile.module.css"
 import profileWallpaper from "../../assets/images/profileWallpaper.jpg";
 import userPhoto from "../../assets/images/userPhoto.jpg";
 import Preloader from "../common/Preloader/Preloader";
+import {ProfileProps} from "./ProfileContainer";
 
 
-const Profile = (props: any) => {
+const Profile = (props: ProfileProps) => {
 
     if (!props.profile) {
         return <Preloader />
@@ -25,7 +26,7 @@ const Profile = (props: any) => {
                 }
             </div>
                 <div className={s.blocks}>
-                    <ProfileInfo profile={props.profile}/>
+                    <ProfileInfo profile={props.profile} status={props.status} updateStatus={props.updateStatus}/>
                     <MyPostsContainer/>
                 </div>
             </div>
