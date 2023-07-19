@@ -8,7 +8,6 @@ import Friends from "./Friends";
 type mapStateToPropsType = SidebarType
 
 
-type mapDispatchToPropsType = any
 
 export type FriendsPropsType = mapStateToPropsType
 

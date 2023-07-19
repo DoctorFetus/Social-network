@@ -8,7 +8,6 @@ const MyPosts: React.FC<MypPostsPropsType> = (props) => {
 
     let postsElements = props.posts.map(p => <Posts profile={props.profile} key={p.id} message={p.message} likeCounter={p.likeCounter} id={p.id}/>)
 
-    const newPostElement = React.createRef<HTMLTextAreaElement>()
 
     const addPost = (formData: AddPostFormType) => {
         props.addPost(formData.newPostBody)
