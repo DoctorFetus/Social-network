@@ -1,6 +1,10 @@
 import React, {ChangeEvent} from 'react';
 import {ProfileInfoType} from "../ProfileInfo/ProfileInfo";
-import profile from "../Profile";
+
+type ProfileStatusStateType = {
+    editMode: boolean,
+    currentStatus: string | null
+}
 
 class ProfileStatus extends React.Component<Omit<ProfileInfoType, "profile">, any> {
     state =  {
@@ -26,6 +30,15 @@ class ProfileStatus extends React.Component<Omit<ProfileInfoType, "profile">, an
         })
         this.props.updateStatus(this.state.currentStatus)
     }
+
+    componentDidUpdate(prevProps: Omit<ProfileInfoType, "profile">, prevState: ProfileStatusStateType) {
+        if (prevProps.status !== this.props.status) {
+            this.setState({
+                currentStatus: this.props.status
+            })
+        }
+    }
+
     render() {
         return <span>
             {!this.state.editMode

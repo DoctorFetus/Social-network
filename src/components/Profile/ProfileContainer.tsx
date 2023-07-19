@@ -2,10 +2,9 @@ import React from 'react';
 import Profile from "./Profile";
 import {getUserProfile, getUserStatus, updateStatus, UserProfileType} from "../../redux/redusers/profile-reducer";
 import {connect} from "react-redux";
-import {StateType} from "../../redux/redux-store";
+import {StoreType} from "../../redux/redux-store";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {compose} from "redux";
-import {profileApi} from "../../api/api";
 
 type MapStateToPropsType = {
     profile: UserProfileType | null
@@ -45,9 +44,9 @@ class ProfileContainer extends React.Component<ProfileProps> {
     }
 }
 
-const mapStateToProps = (state: StateType): MapStateToPropsType => ({
-    profile: state.profilePage.profile,
-    status: state.profilePage.status
+const mapStateToProps = (state: StoreType): MapStateToPropsType => ({
+    profile: state.profilePage["profile"],
+    status: state.profilePage["status"]
 })
 
 export default compose<React.ComponentType>(

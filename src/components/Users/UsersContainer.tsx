@@ -1,5 +1,5 @@
 import {connect} from "react-redux";
-import {StateType} from "../../redux/redux-store";
+import {StoreType} from "../../redux/redux-store";
 import {acceptFollowUser, getUsers, acceptUnfollowUser, UsersPageType} from "../../redux/redusers/users-reducer";
 import React from "react";
 import Users from "./Users";
@@ -14,7 +14,7 @@ type mapDispatchToPropsType = {
 
 export type UsersPropsType = mapStateToPropsType & mapDispatchToPropsType
 
-const mapStateToProps = (state: StateType): mapStateToPropsType => ({
+const mapStateToProps = (state: StoreType): mapStateToPropsType => ({
     users: state.usersPage.users,
     pageSize: state.usersPage.pageSize,
     totalUsersCount: state.usersPage.totalUsersCount,

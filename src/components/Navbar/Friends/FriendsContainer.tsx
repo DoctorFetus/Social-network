@@ -1,5 +1,5 @@
 import React from 'react';
-import {StateType} from "../../../redux/redux-store";
+import {StoreType} from "../../../redux/redux-store";
 import {Dispatch} from "redux";
 import {connect} from "react-redux";
 import {SidebarType} from "../../../redux/redusers/sidebar-reducer";
@@ -12,7 +12,7 @@ type mapDispatchToPropsType = any
 
 export type FriendsPropsType = mapStateToPropsType
 
-const mapStateToProps = (state: StateType): mapStateToPropsType => ({
+const mapStateToProps = (state: StoreType): mapStateToPropsType => ({
     friends: state.sidebar.friends
 })
 

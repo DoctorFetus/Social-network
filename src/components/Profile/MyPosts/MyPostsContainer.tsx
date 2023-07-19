@@ -2,7 +2,7 @@ import React from "react";
 import {addPostCreator, ProfilePageType, updatePostTextCreator} from "../../../redux/redusers/profile-reducer";
 import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
-import {StateType} from "../../../redux/redux-store";
+import {StoreType} from "../../../redux/redux-store";
 import {Dispatch} from "redux";
 
 
@@ -14,11 +14,11 @@ type mapDispatchToPropsType = {
 
 export type MypPostsPropsType = mapStateToPropsType & mapDispatchToPropsType
 
-const mapStateToProps = (state: StateType): mapStateToPropsType => ({
-        posts: state.profilePage.posts,
-        newPostText: state.profilePage.newPostText,
-        profile: state.profilePage.profile,
-        status: state.profilePage.status
+const mapStateToProps = (state: StoreType): mapStateToPropsType => ({
+        posts: state.profilePage["posts"],
+        newPostText: state.profilePage["newPostText"],
+        profile: state.profilePage["profile"],
+        status: state.profilePage["status"]
 })
 
 const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
