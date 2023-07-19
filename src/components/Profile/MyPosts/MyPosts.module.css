@@ -8,37 +8,6 @@
     font-size: 23px;
 }
 
-.addNewPost {
-    display: flex;
-    gap: 10px;
-}
-
-.addNewPost textarea {
-    width: 500px;
-    resize: none;
-    border-radius: 4px;
-    padding: 5px;
-}
-
-.addNewPost textarea::placeholder {
-    font-family: Roboto, sans-serif;
-}
-
-.addNewPost button {
-    text-transform: uppercase;
-    padding: 10px;
-    border-radius: 4px;
-    /*background: linear-gradient(45deg, rgb(254, 56, 56), rgb(182, 82, 82));*/
-    background: gray;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-.addNewPost button:hover {
-    background: linear-gradient(45deg, rgb(254, 56, 56), rgb(163, 0, 0));
-}
-
 .posts {
     margin-top: 20px;
 }

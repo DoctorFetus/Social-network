@@ -3,6 +3,7 @@ import s from "./Dialogs.module.css"
 import DialogItem from "./Dialog/DialogItem";
 import Message from "./Message/Message";
 import {DialogsPropsType} from "./DialogsContainer";
+import AddMessageForm from "./Dialog/AddMessageForm/AddMessageForm";
 
 
 const Dialogs: React.FC<DialogsPropsType> = (props) => {
@@ -11,13 +12,8 @@ const Dialogs: React.FC<DialogsPropsType> = (props) => {
     let messagesElements = props.messages.map(m => <Message key={m.id} sender={m.sender} message={m.message}
                                                                         id={m.id}/>)
 
-    let newMessageElement = React.createRef<HTMLTextAreaElement>()
-    const sendMessage = () => {
-        props.sendMessage()
-    }
-
-    const changeMessageText = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.updateNewMessageBody(e.currentTarget.value)
+    const sendMessage = (formData: {newMessageBody: string}) => {
+        props.sendMessage(formData.newMessageBody)
     }
 
     return (
@@ -29,18 +25,7 @@ const Dialogs: React.FC<DialogsPropsType> = (props) => {
                 <div>
                     {messagesElements}
                 </div>
-                <div className={s.sender}>
-                    <textarea ref={newMessageElement}
-                              className={s.message_area}
-                              placeholder={"Type message..."}
-                              value={props.newMessageText}
-                              onChange={changeMessageText}
-                    />
-                    <button
-                        onClick={sendMessage}
-                        className={s.btn_send}>Send
-                    </button>
-                </div>
+                <AddMessageForm onSubmit={sendMessage}/>
             </div>
         </div>
     )

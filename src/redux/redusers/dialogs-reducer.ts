@@ -4,7 +4,6 @@ import {MessageType} from "../../components/Dialogs/Message/Message";
 export type DialogsPageType = {
     dialogs: Array<DialogItemType>
     messages: Array<MessageType>
-    newMessageText: string
 }
 
 const initialState: DialogsPageType = {
@@ -21,45 +20,29 @@ const initialState: DialogsPageType = {
         {id: 3, message: "Not bad", sender: "friend"},
         {id: 4, message: "Wow! That is work!", sender: "user"}
     ],
-    newMessageText: ""
 }
 
-function dialogsReducer(state = initialState, action: DialogsPageActionType): DialogsPageType {
+
+
+function dialogsReducer(state = initialState, action: SendMessageCreatorType) {
     switch (action.type) {
-        case "ADD-MESSAGE":
-                const newMessage = {
-                    id: 5,
-                    message: state.newMessageText,
-                    sender: "user"
-                }
-                return  state.newMessageText
-                    ? {...state, newMessageText: "", messages: [...state.messages, newMessage]}
-                    : state
-
-
-        case "UPDATE-NEW-MESSAGE-BODY":
-            return {...state, newMessageText: action.newMessageText}
+        case "SEND-MESSAGE":
+            const newMessage = {
+                id: 5,
+                message: action.payload.newMessage,
+                sender: "user"
+            }
+            return {...state, messages: [...state.messages, newMessage]}
         default:
             return state
     }
 }
 
-
-export type DialogsPageActionType = SendMessageCreatorType | UpdateMessageBodyCreatorType
-
-type SendMessageCreatorType = ReturnType<typeof sendMessageCreator>
-export const sendMessageCreator = () => {
-    return {type: "ADD-MESSAGE"} as const
+type SendMessageCreatorType = ReturnType<typeof sendMessage>
+export const sendMessage = (newMessage: string) => {
+    return {type: "SEND-MESSAGE", payload: {newMessage}} as const
 }
 
-
-type UpdateMessageBodyCreatorType = ReturnType<typeof updateMessageBodyCreator>
-export const updateMessageBodyCreator = (text: string) => {
-    return {
-        type: "UPDATE-NEW-MESSAGE-BODY",
-        newMessageText: text
-    } as const
-}
-
+export type DialogsPageActionType = SendMessageCreatorType
 
 export default dialogsReducer

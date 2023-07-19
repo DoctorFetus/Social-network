@@ -27,7 +27,6 @@ export type UserProfileType = {
 
 export type ProfilePageType = {
     posts: Array<PostsType>
-    newPostText: string
     profile: null | UserProfileType
     status: string | null
 }
@@ -37,7 +36,6 @@ const initialState = {
         {id: 1, message: "Hi, how are you?", likeCounter: 15},
         {id: 2, message: "I am dead inside", likeCounter: 25}
     ],
-    newPostText: "",
     profile: null,
     status: null
 }
@@ -48,15 +46,10 @@ function profileReducer(state = initialState, action: ProfilePageActionType): Pr
         case "ADD-POST":
             const newPost: PostsType = {
                 id: 5,
-                message: state.newPostText,
+                message: action.payload.newPost,
                 likeCounter: 0
             }
-            return state.newPostText
-                ? {...state, newPostText: "", posts: [newPost, ...state.posts]}
-                : state
-        case "UPDATE-NEW-POST-TEXT":
-            state.newPostText = action.newText
-            return {...state, newPostText: action.newText}
+            return {...state, posts: [newPost, ...state.posts]}
         case "SET-USER-PROFILE":
             return {...state, profile: action.payload.profile}
         case "SET-USER-STATUS":
@@ -68,21 +61,14 @@ function profileReducer(state = initialState, action: ProfilePageActionType): Pr
 
 
 export type ProfilePageActionType = AddPostCreatorType
-    | UpdatePostTextCreatorType
     | SetUserProfileType
     | SetProfileStatusType
 
-type AddPostCreatorType = ReturnType<typeof addPostCreator>
-export const addPostCreator = () => {
-    return {type: "ADD-POST"} as const
+type AddPostCreatorType = ReturnType<typeof addPost>
+export const addPost = (newPost: string) => {
+    return {type: "ADD-POST", payload: {newPost}} as const
 }
-type UpdatePostTextCreatorType = ReturnType<typeof updatePostTextCreator>
-export const updatePostTextCreator = (text: string) => {
-    return {
-        type: "UPDATE-NEW-POST-TEXT",
-        newText: text
-    } as const
-}
+
 type SetUserProfileType = ReturnType<typeof setUserProfile>
 export const setUserProfile = (profile: UserProfileType) => {
     return {

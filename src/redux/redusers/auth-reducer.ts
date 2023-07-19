@@ -1,5 +1,8 @@
-import {Dispatch} from "redux";
+import {AnyAction, Dispatch} from "redux";
 import {authAPI} from "../../api/api";
+import {FormDataType} from "../../components/Login/LoginForm/LoginForm";
+import {ThunkDispatch} from "redux-thunk";
+import {StoreType} from "../redux-store";
 
 export type AuthType = {
     id: number | null,
@@ -45,6 +48,16 @@ export const getAuthUserData = () => (dispatch: Dispatch) => {
             if (!response.resultCode) {
                 const {id, email, login} = response.data
                 dispatch(setUserData(id, email, login))
+            }
+        })
+}
+
+export const loginIn = (formData: FormDataType) => (dispatch: ThunkDispatch<StoreType, never, AnyAction>) => {
+    authAPI.loginIn(formData)
+        .then(response => {
+            if (response.data) {
+                console.log(response.data)
+                dispatch(getAuthUserData())
             }
         })
 }
