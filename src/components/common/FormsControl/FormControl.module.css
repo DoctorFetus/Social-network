@@ -9,3 +9,8 @@
 {
     color: crimson;
 }
+
+.formSummaryError {
+    color: red;
+    font-style: italic;
+}

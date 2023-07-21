@@ -1,9 +1,11 @@
 import {connect} from "react-redux";
 import {StoreType} from "../../redux/redux-store";
-import {acceptFollowUser, getUsers, acceptUnfollowUser, UsersPageType} from "../../redux/redusers/users-reducer";
+import {acceptFollowUser, acceptUnfollowUser, getUsers, UsersPageType} from "../../redux/redusers/users-reducer";
 import React from "react";
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
+import {compose} from "redux";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 type mapStateToPropsType = UsersPageType
 type mapDispatchToPropsType = {
@@ -45,7 +47,11 @@ class UsersContainer extends React.Component<UsersPropsType, []> {
     }
 }
 
-export default connect(mapStateToProps,
-    {acceptFollowUser, acceptUnfollowUser, getUsers}
-    )(UsersContainer)
+// export default connect(mapStateToProps,
+//     {acceptFollowUser, acceptUnfollowUser, getUsers}
+//     )(UsersContainer)
 
+export default compose<React.ComponentType>(
+    connect(mapStateToProps,{acceptFollowUser, acceptUnfollowUser, getUsers}),
+    withAuthRedirect
+)(UsersContainer)

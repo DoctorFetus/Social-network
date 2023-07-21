@@ -4,8 +4,8 @@ import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import s from "./Profile.module.css"
 import profileWallpaper from "../../assets/images/profileWallpaper.jpg";
 import userPhoto from "../../assets/images/userPhoto.jpg";
-import Preloader from "../common/Preloader/Preloader";
 import {ProfileProps} from "./ProfileContainer";
+import Preloader from "../common/Preloader/Preloader";
 
 
 const Profile = (props: ProfileProps) => {
