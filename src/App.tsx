@@ -13,8 +13,6 @@ import {connect} from "react-redux";
 import {initializeApp} from "./redux/redusers/app-reducer";
 import {StoreType} from "./redux/redux-store";
 import Preloader from "./components/common/Preloader/Preloader";
-import {withAuthRedirect} from "./hoc/withAuthRedirect";
-import {compose} from "redux";
 import UsersContainer from "./components/Users/UsersContainer";
 
 class App extends React.Component<AppPropsType> {
