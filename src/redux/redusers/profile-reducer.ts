@@ -1,6 +1,7 @@
-import {PostsType} from "../../components/Profile/MyPosts/Posts/Posts";
+import posts, {PostsType} from "../../components/Profile/MyPosts/Posts/Posts";
 import {Dispatch} from "redux";
 import {profileApi} from "../../api/api";
+import {v1} from "uuid";
 
 export type UserProfileType = {
     userId: number
@@ -31,10 +32,10 @@ export type ProfilePageType = {
     status: string | null
 }
 
-const initialState = {
+const initialState: ProfilePageType = {
     posts: [
-        {id: 1, message: "Hi, how are you?", likeCounter: 15},
-        {id: 2, message: "I am dead inside", likeCounter: 25}
+        {id: v1(), message: "Hi, how are you?", likeCounter: 15},
+        {id: v1(), message: "I am dead inside", likeCounter: 25}
     ],
     profile: null,
     status: null
@@ -45,7 +46,7 @@ function profileReducer(state = initialState, action: ProfilePageActionType): Pr
     switch (action.type) {
         case "ADD-POST":
             const newPost: PostsType = {
-                id: 5,
+                id: v1(),
                 message: action.payload.newPost,
                 likeCounter: 0
             }
@@ -54,6 +55,8 @@ function profileReducer(state = initialState, action: ProfilePageActionType): Pr
             return {...state, profile: action.payload.profile}
         case "SET-USER-STATUS":
             return {...state, status: action.payload.status}
+        case "DELETE-POST":
+            return {...state, posts: state.posts.filter(post => post.id !== action.payload.postId)}
         default:
             return state
     }
@@ -63,6 +66,7 @@ function profileReducer(state = initialState, action: ProfilePageActionType): Pr
 export type ProfilePageActionType = AddPostCreatorType
     | SetUserProfileType
     | SetProfileStatusType
+    | DeletePostType
 
 type AddPostCreatorType = ReturnType<typeof addPost>
 export const addPost = (newPost: string) => {
@@ -81,6 +85,14 @@ export const setProfileStatus = (status: string) => {
     return {
         type: "SET-USER-STATUS",
         payload: {status}
+    } as const
+}
+
+type DeletePostType = ReturnType<typeof deletePost>
+export const deletePost = (postId: string) => {
+    return {
+        type: "DELETE-POST",
+        payload: {postId}
     } as const
 }
 

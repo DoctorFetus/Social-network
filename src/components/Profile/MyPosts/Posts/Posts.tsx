@@ -4,7 +4,7 @@ import {UserProfileType} from "../../../../redux/redusers/profile-reducer";
 import userPhoto from "../../../../assets/images/userPhoto.jpg"
 
 export type PostsType = {
-    id: number,
+    id: string,
     message: string,
     likeCounter: number
 }
