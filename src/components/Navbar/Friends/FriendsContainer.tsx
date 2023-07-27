@@ -1,5 +1,5 @@
 import React from 'react';
-import {StoreType} from "../../../redux/redux-store";
+import {StoreType} from "../../../redux/store";
 import {Dispatch} from "redux";
 import {connect} from "react-redux";
 import {SidebarType} from "../../../redux/redusers/sidebar-reducer";

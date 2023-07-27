@@ -1,5 +1,5 @@
 import {connect} from "react-redux";
-import {StoreType} from "../../redux/redux-store";
+import {StoreType} from "../../redux/store";
 import {acceptFollowUser, acceptUnfollowUser, requestUsers, UsersPageType} from "../../redux/redusers/users-reducer";
 import React from "react";
 import Users from "./Users";

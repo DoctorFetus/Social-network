@@ -24,7 +24,7 @@ const initialState: DialogsPageType = {
 
 
 
-function dialogsReducer(state = initialState, action: SendMessageCreatorType) {
+function dialogsReducer(state = initialState, action: DialogsPageActionType) {
     switch (action.type) {
         case "SEND-MESSAGE":
             const newMessage = {

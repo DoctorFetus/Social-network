@@ -1,7 +1,7 @@
 import {connect} from "react-redux";
 import Login from "./Login";
 import {FormDataType} from "./LoginForm/LoginForm";
-import {StoreType} from "../../redux/redux-store";
+import {StoreType} from "../../redux/store";
 import {loginIn} from "../../redux/redusers/auth-reducer";
 
 type MapStateToPropsType =  {
