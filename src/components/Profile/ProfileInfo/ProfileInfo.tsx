@@ -11,7 +11,7 @@ export type ProfileInfoType = {
     updateStatus: (status: string) => void
 }
 
-const ProfileInfo = (props:  ProfileInfoType) => {
+const ProfileInfo = (props: ProfileInfoType) => {
         if (!props.profile) {
             return <Preloader />
         }

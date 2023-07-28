@@ -1,6 +1,6 @@
-import profileReducer, {addPost, deletePost, ProfilePageType} from "../redux/redusers/profile-reducer";
+import profileReducer, {addPost, deletePost, ProfilePageType} from "../../redux/redusers/profile-reducer";
 import {v1} from "uuid";
-import posts from "../components/Profile/MyPosts/Posts/Posts";
+import posts from "../../components/Profile/MyPosts/Posts/Posts";
 
 let initialState: ProfilePageType
 
