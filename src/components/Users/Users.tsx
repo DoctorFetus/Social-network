@@ -1,56 +1,27 @@
 import React from 'react';
-import s from "./Users.module.css";
-import userPhoto from "../../assets/images/userPhoto.jpg";
 import {UsersPropsType} from "./UsersContainer";
-import {NavLink} from "react-router-dom";
+import Paginator from "../common/Pagination/Paginator";
+import User from "./User/User";
 
-const Users = (props: UsersPropsType & { onPageChanged: (page: number) => void }) => {
-
-    const pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
-    const pages = []
-    for (let i = 1; i <= pagesCount; i++) {
-        pages.push(i)
-    }
+const Users = ({currentPage, pageSize, totalUsersCount, onPageChanged, ...props}: UsersPropsType & { onPageChanged: (page: number) => void }) => {
     return (
         <div>
 
-            {props.users.map(user => <div key={user.id} className={s.container}>
-                <div className={s.ava_btn}>
-                    <NavLink to={"/profile/" + user.id}>
-                        <img className={s.avatar} src={user.photos.small ? user.photos.small : userPhoto} alt="avatar"/>
-                    </NavLink>
-                    {user.followed
-                        ? <button className={s.btn}
-                                  disabled={props.followingFilter.some(id => user.id == id)}
-                                  onClick={() => {props.acceptUnfollowUser(user.id)}}
-                        >unfollow</button>
-                        : <button className={s.btn}
-                                  disabled={props.followingFilter.some(id => user.id == id)}
-                                  onClick={() => {props.acceptFollowUser(user.id)}}
-                        >follow</button>}
-                </div>
-                <div className={s.userInfo}>
-                    <div className={s.name_status}>
-                        <div className={s.name}>{user.name}</div>
-                        <div>{user.status}</div>
-                    </div>
-                    <div className={s.location}>
-                        {'Russia'}, <br/>
-                        {'Moscow'}
-                    </div>
-                </div>
-            </div>)}
-            <div className={s.pagesContainer}>
-                {pages.map(page => {
-                    if (page <= 10) {
-                        return <span
-                            key={page}
-                            className={props.currentPage === page ? `${s.pageSelector} ${s.activePage}` : s.pageSelector}
-                            onClick={() => props.onPageChanged(page)}
-                        >{page}</span>
-                    }
-                })}
-            </div>
+            {props.users.map(user => <User
+                key={user.id}
+                name={user.name}
+                id={user.id}
+                status={user.status}
+                followed={user.followed}
+                photos={user.photos}
+                followingFilter={props.followingFilter}
+                acceptUnfollowUser={props.acceptUnfollowUser}
+                acceptFollowUser={props.acceptFollowUser} />
+            )}
+            <Paginator currentPage={currentPage}
+                       pageSize={pageSize}
+                       totalUsersCount={totalUsersCount}
+                       onPageChanged={onPageChanged}/>
         </div>)
 }
 

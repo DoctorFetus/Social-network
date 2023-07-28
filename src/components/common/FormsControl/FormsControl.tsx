@@ -5,16 +5,16 @@ import style from "./FormControl.module.css"
 type ChildrenType = {
     children: React.ReactNode
 }
-const FormControl = ({input, meta, children, ...restProps}: WrappedFieldProps & ChildrenType) => {
+const FormControl = ({input, meta: {touched, error}, children, ...restProps}: WrappedFieldProps & ChildrenType) => {
 
-    const hasError = meta.touched && meta.error
+    const hasError = touched && error
 
     return (
         <div className={style.formControl + " " + (hasError ?  style.error : "")}>
             <div >
                 {children}
             </div>
-            {hasError && <span>{meta.error}</span>}
+            {hasError && <span>{error}</span>}
         </div>
     );
 }
