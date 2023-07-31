@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import s from './Paginator.module.css';
 
 type PaginatorPropsType = {
@@ -8,7 +8,11 @@ type PaginatorPropsType = {
     onPageChanged: (page: number) => void
     portionSize?: number
 }
-const Paginator = ({currentPage, pageSize, totalUsersCount, onPageChanged, portionSize=10}: PaginatorPropsType) => {
+const Paginator = ({currentPage, pageSize, totalUsersCount, onPageChanged, portionSize = 10}: PaginatorPropsType) => {
+
+    useEffect(() => {
+        setPortionNumber(Math.ceil(currentPage / portionSize))
+    }, [])
 
     const pagesCount = Math.ceil(totalUsersCount / pageSize)
     const pages = []
@@ -25,17 +29,19 @@ const Paginator = ({currentPage, pageSize, totalUsersCount, onPageChanged, porti
 
     return (<div className={s.paginator}>
 
-        {portionNumber > 1 && <button className={btnClass} onClick={() => setPortionNumber(portionNumber - 1)}>{"<"}</button> }
-        <div className={s.pagesContainer}>
-            {pages.filter((p => p >= leftPortionPageNumber && p <= rightPortionNumber)).map(page => {
+            {portionNumber > 1 &&
+                <button className={btnClass} onClick={() => setPortionNumber(portionNumber - 1)}>{"<"}</button>}
+            <div className={s.pagesContainer}>
+                {pages.filter((p => p >= leftPortionPageNumber && p <= rightPortionNumber)).map(page => {
                     return <span
                         key={page}
                         className={currentPage === page ? `${s.pageSelector} ${s.activePage}` : s.pageSelector}
                         onClick={() => onPageChanged(page)}
                     >{page}</span>
-            })}
-        </div>
-            {portionNumber < portionCount && <button className={btnClass} onClick={() => setPortionNumber(portionNumber + 1)}>{">"}</button>}
+                })}
+            </div>
+            {portionNumber < portionCount &&
+                <button className={btnClass} onClick={() => setPortionNumber(portionNumber + 1)}>{">"}</button>}
         </div>
     );
 };
