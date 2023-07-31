@@ -22,3 +22,7 @@
 .blocks {
     display: flex;
 }
+
+.chooseFile {
+    margin-top: 100px;
+}

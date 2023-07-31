@@ -17,10 +17,7 @@ const ProfileInfo = (props: ProfileInfoType) => {
         }
         return <div className={s.container}>
             <div className={s.name}>
-                {props.profile.photos
-                    ? props.profile.fullName
-                    : "Mikhal Palkin"
-                }
+                {props.profile.fullName}
             </div>
             <div>{props.profile.aboutMe}</div>
             <div>Looking for job: {props.profile.lookingForAJob ? "YES" : "NO"}</div>

@@ -19,12 +19,13 @@ export type UserProfileType = {
         youtube: string
         mainLink: string
     }
-    photos: {
-        small: string
-        large: string
-    }
+    photos: PhotoType
 }
 
+type PhotoType = {
+        small: string
+        large: string
+}
 
 export type ProfilePageType = {
     posts: Array<PostsType>
@@ -57,6 +58,9 @@ function profileReducer(state = initialState, action: ProfilePageActionType): Pr
             return {...state, status: action.payload.status}
         case "DELETE-POST":
             return {...state, posts: state.posts.filter(post => post.id !== action.payload.postId)}
+        case "SAVE-NEW-PHOTO":
+            debugger
+            return {...state, profile: {...state.profile!, photos: {...action.payload.newPhoto}}}
         default:
             return state
     }
@@ -67,6 +71,7 @@ export type ProfilePageActionType = AddPostCreatorType
     | SetUserProfileType
     | SetProfileStatusType
     | DeletePostType
+    | SavePhoto
 
 type AddPostCreatorType = ReturnType<typeof addPost>
 export const addPost = (newPost: string) => {
@@ -96,6 +101,13 @@ export const deletePost = (postId: string) => {
     } as const
 }
 
+type SavePhoto = ReturnType<typeof savePhoto>
+const savePhoto = (newPhoto: PhotoType) => {
+    return {
+        type: "SAVE-NEW-PHOTO",
+        payload: {newPhoto}
+    } as const
+}
 
 export const getUserProfile = (userID: string) => async (dispatch: Dispatch) => {
 
@@ -114,5 +126,15 @@ export const updateStatus = (status: string) => async (dispatch: Dispatch) => {
         dispatch(setProfileStatus(status))
     }
 }
+
+export const updatePhoto = (newPhoto: File) => async (dispatch: Dispatch) => {
+    const response = await profileApi.updatePhoto(newPhoto)
+    if (!response.data.resultCode) {
+        debugger
+        dispatch(savePhoto(response.data.data.photos))
+    }
+}
+
+
 
 export default profileReducer
