@@ -30,6 +30,12 @@ const setInitialized = () => {
 }
 
 export const initializeApp = () => async (dispatch: ThunkDispatch<StoreType, never, AnyAction>) => {
-    await dispatch(getAuthUserData())
-    dispatch(setInitialized())
+    try {
+        await dispatch(getAuthUserData())
+        dispatch(setInitialized())
+    }
+    catch(e) {
+        console.log(e)
+    }
+
 }
