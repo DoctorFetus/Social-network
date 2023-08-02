@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import s from "./ProfileInfo.module.css"
-import {updateProfileData, UserProfileType} from "../../../redux/redusers/profile-reducer";
+import {UserProfileType} from "../../../redux/redusers/profile-reducer";
 import ProfileStatus from "../ProfileStatus/ProfileStatus";
 import ProfileData from "./ProfileData/ProfileData";
 import ProfileDataForm, {ProfileFormDataType} from "./ProfileData/ProfileDataForm";

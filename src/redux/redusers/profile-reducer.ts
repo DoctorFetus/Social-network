@@ -1,10 +1,9 @@
-import posts, {PostsType} from "../../components/Profile/MyPosts/Posts/Posts";
+import {PostsType} from "../../components/Profile/MyPosts/Posts/Posts";
 import {AnyAction, Dispatch} from "redux";
 import {profileApi} from "../../api/api";
 import {v1} from "uuid";
 import {ThunkDispatch} from "redux-thunk";
 import {StoreType} from "../store";
-import {log} from "util";
 import {stopSubmit} from "redux-form";
 
 export type ContactsKeyType = "github" | "vk" | "instagram" | "twitter" | "website" | "youtube" | "mainLink"

@@ -3,7 +3,6 @@ import Login from "./Login";
 import {FormDataType} from "./LoginForm/LoginForm";
 import {StoreType} from "../../redux/store";
 import {loginIn} from "../../redux/redusers/auth-reducer";
-import {stat} from "fs";
 
 type MapStateToPropsType =  {
     isAuth: boolean

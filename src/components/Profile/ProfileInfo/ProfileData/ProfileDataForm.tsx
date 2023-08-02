@@ -4,7 +4,6 @@ import {UserProfileType} from "../../../../redux/redusers/profile-reducer";
 import {Input, Textarea} from "../../../common/FormsControl/FormsControl";
 import {v1} from "uuid";
 import style from "../../../common/FormsControl/FormControl.module.css";
-import {required} from "../../../../utils/validators/validators";
 
 export type ProfileFormDataType = UserProfileType
 
