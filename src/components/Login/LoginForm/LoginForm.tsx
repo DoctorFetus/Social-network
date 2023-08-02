@@ -8,8 +8,14 @@ export type FormDataType = {
     email: string,
     password: string,
     rememberMe: boolean
+    captchaUrl: string | null
 }
-const LoginForm = ({error, handleSubmit}: InjectedFormProps<FormDataType>) => {
+
+type RestProps = {
+    captchaUrl: string | null
+}
+
+const LoginForm = ({error, handleSubmit, captchaUrl}: InjectedFormProps<FormDataType, RestProps> & RestProps) => {
     return (
         <>
             {error && <div className={style.formSummaryError}>{error}</div>}
@@ -18,7 +24,6 @@ const LoginForm = ({error, handleSubmit}: InjectedFormProps<FormDataType>) => {
                     <Field component={Input}
                            name={"email"}
                            placeholder={"Login"}
-                           validate={[required]}
                     />
                 </div>
                 <div>
@@ -32,6 +37,15 @@ const LoginForm = ({error, handleSubmit}: InjectedFormProps<FormDataType>) => {
                 <div>
                     <Field component={Input} name={"rememberMe"} type="checkbox"/> remember me
                 </div>
+                { captchaUrl &&
+                    <>
+                    <img src={captchaUrl} alt={"captcha"}/>
+                        <Field
+                            component={Input}
+                            name={"captcha"}
+                            validate={[required]}
+                            placeholder={"captcha"}/>
+                    </>}
                 <div>
                     <button>Login</button>
                 </div>
@@ -41,6 +55,6 @@ const LoginForm = ({error, handleSubmit}: InjectedFormProps<FormDataType>) => {
     );
 };
 
-export const LoginReduxForm = reduxForm<FormDataType>({form: "login"})(LoginForm)
+export const LoginReduxForm = reduxForm<FormDataType, RestProps>({form: "login"})(LoginForm)
 
 export default LoginForm;

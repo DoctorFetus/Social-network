@@ -1,5 +1,6 @@
 import axios from "axios";
 import {FormDataType} from "../components/Login/LoginForm/LoginForm";
+import {UserProfileType} from "../redux/redusers/profile-reducer";
 
 const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
@@ -42,10 +43,13 @@ export const profileApi = {
                'Content-type': 'multipart/form-data'
            }
         })
+    },
+    updateProfileData(newProfileData: Partial<UserProfileType>) {
+        return instance.put('profile', newProfileData)
     }
 }
 
-export const authAPI = {
+export const authApi = {
     authMe() {
         return instance.get(`auth/me`)
             .then(response => response.data)
@@ -59,4 +63,11 @@ export const authAPI = {
             .then(response => response.data)
     }
 
+}
+
+export const securityApi = {
+    getCaptcha() {
+        return instance.get('security/get-captcha-url')
+            .then(response => response.data)
+    }
 }

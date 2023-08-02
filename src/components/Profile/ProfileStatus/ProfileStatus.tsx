@@ -6,7 +6,12 @@ type ProfileStatusStateType = {
     currentStatus: string | null
 }
 
-class ProfileStatus extends React.Component<Omit<ProfileInfoType, "profile">, any> {
+type ProfileStatusPropsType = {
+    status: string | null
+    updateStatus: (status: string) => void
+}
+
+class ProfileStatus extends React.Component<ProfileStatusPropsType, any> {
     state =  {
         editMode: false,
         currentStatus: this.props.status!

@@ -1,23 +1,29 @@
 import posts, {PostsType} from "../../components/Profile/MyPosts/Posts/Posts";
-import {Dispatch} from "redux";
+import {AnyAction, Dispatch} from "redux";
 import {profileApi} from "../../api/api";
 import {v1} from "uuid";
+import {ThunkDispatch} from "redux-thunk";
+import {StoreType} from "../store";
+import {log} from "util";
+import {stopSubmit} from "redux-form";
+
+export type ContactsKeyType = "github" | "vk" | "instagram" | "twitter" | "website" | "youtube" | "mainLink"
 
 export type UserProfileType = {
-    userId: number
+    userId: string
     lookingForAJob: boolean
     lookingForAJobDescription: string
     fullName: string
     aboutMe: string
     contacts: {
-        github: string
-        vk: string
-        facebook: string
-        instagram: string
-        twitter: string
-        website: string
-        youtube: string
-        mainLink: string
+        "github": string
+        "vk": string
+        "facebook": string
+        "instagram": string
+        "twitter": string
+        "website": string
+        "youtube": string
+        "mainLink": string
     }
     photos: PhotoType
 }
@@ -110,7 +116,6 @@ const savePhoto = (newPhoto: PhotoType) => {
 }
 
 export const getUserProfile = (userID: string) => async (dispatch: Dispatch) => {
-
     const response = await profileApi.getProfile(userID)
     dispatch(setUserProfile(response.data))
 }
@@ -130,11 +135,24 @@ export const updateStatus = (status: string) => async (dispatch: Dispatch) => {
 export const updatePhoto = (newPhoto: File) => async (dispatch: Dispatch) => {
     const response = await profileApi.updatePhoto(newPhoto)
     if (!response.data.resultCode) {
-        debugger
         dispatch(savePhoto(response.data.data.photos))
     }
 }
-
-
+export const updateProfileData = (newProfileData: Partial<UserProfileType>) =>
+    async (dispatch: ThunkDispatch<StoreType, never, AnyAction>, getState: () => StoreType) => {
+        const userId= getState().profilePage.profile!.userId
+    const response = await profileApi.updateProfileData(newProfileData)
+     if (!response.data.resultCode) {
+         dispatch(getUserProfile(userId))
+     } else {
+         const error = response.data.messages[0]
+         const leftBorder = error.lastIndexOf(">")
+         const rightBorder = error.lastIndexOf(")")
+         const errorFormName = (error.substring(leftBorder + 1, rightBorder)).toLowerCase()
+         // dispatch(stopSubmit("profileData", {contacts: {[errorFormName]: error}}))
+         dispatch(stopSubmit("profileData", {_error: error}))
+         await Promise.reject(error)
+     }
+}
 
 export default profileReducer

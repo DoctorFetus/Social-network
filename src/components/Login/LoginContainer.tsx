@@ -3,9 +3,11 @@ import Login from "./Login";
 import {FormDataType} from "./LoginForm/LoginForm";
 import {StoreType} from "../../redux/store";
 import {loginIn} from "../../redux/redusers/auth-reducer";
+import {stat} from "fs";
 
 type MapStateToPropsType =  {
     isAuth: boolean
+    captchaUrl: null | string
 }
 
 type MapDispatchToPropsType = {
@@ -15,7 +17,8 @@ type MapDispatchToPropsType = {
 export type LoginType = MapStateToPropsType & MapDispatchToPropsType
 
 const mapStateToProps = (state: StoreType) : MapStateToPropsType => ({
-    isAuth: state.auth.isAuth
+    isAuth: state.auth.isAuth,
+    captchaUrl: state.auth.captchaUrl
 })
 
 

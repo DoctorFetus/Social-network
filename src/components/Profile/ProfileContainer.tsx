@@ -4,6 +4,7 @@ import {
     getUserProfile,
     getUserStatus,
     updatePhoto,
+    updateProfileData,
     updateStatus,
     UserProfileType
 } from "../../redux/redusers/profile-reducer";
@@ -24,6 +25,7 @@ type MapDispatchToPropsType = {
     getUserStatus: (userID: string) => void
     updateStatus: (status: string) => void
     updatePhoto: (newPhoto: File) => void
+    updateProfileData: (profileData: UserProfileType) => Promise<string>
 }
 
 type PathParamsType = {
@@ -55,7 +57,6 @@ class ProfileContainer extends React.Component<ProfileProps> {
             this.refreshProfile()
         }
     }
-
     render() {
         return <Profile {...this.props} isOwner={!this.props.match.params.userId}/>
     }
@@ -68,7 +69,7 @@ const mapStateToProps = (state: StoreType): MapStateToPropsType => ({
 })
 
 export default compose<React.ComponentType>(
-    connect(mapStateToProps, {getUserProfile, getUserStatus, updateStatus, updatePhoto}),
+    connect(mapStateToProps, {getUserProfile, getUserStatus, updateStatus, updatePhoto, updateProfileData}),
     withRouter,
     withAuthRedirect
 )(ProfileContainer)

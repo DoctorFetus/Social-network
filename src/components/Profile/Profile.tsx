@@ -31,7 +31,11 @@ const Profile = (props: ProfileProps & {isOwner: boolean}) => {
                 {props.isOwner && <input onChange={onFileChange} className={s.chooseFile} type="file"/>}
             </div>
                 <div className={s.blocks}>
-                    <ProfileInfo profile={props.profile} status={props.status} updateStatus={props.updateStatus}/>
+                    <ProfileInfo profile={props.profile}
+                                 status={props.status}
+                                 updateStatus={props.updateStatus}
+                                 updateProfileData={props.updateProfileData}
+                    />
                     <MyPostsContainer/>
                 </div>
             </div>
