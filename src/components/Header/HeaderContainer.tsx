@@ -22,7 +22,8 @@ const mapStateToProps = (state: StoreType): MapStateToPropsType => ({
     id: state.auth.id,
     login: state.auth.login,
     email: state.auth.email,
-    isAuth: state.auth.isAuth
+    isAuth: state.auth.isAuth,
+    captchaUrl: state.auth.captchaUrl
 })
 
 export default connect(mapStateToProps, {logout})(HeaderContainer);
