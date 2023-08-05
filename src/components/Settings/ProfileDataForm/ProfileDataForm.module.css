@@ -1,0 +1,29 @@
+.oneForm {
+    display: flex;
+    align-items: center;
+    margin: 5px;
+    justify-content: space-between;
+}
+
+.checkbox {
+    justify-content: start;
+}
+
+.formContainer {
+    padding: 20px;
+    width: 350px;
+    margin: 0 auto;
+}
+
+.itemsContainer {
+    padding: 20px;
+}
+
+.saveBtn {
+    display: block;
+    margin: 20px auto 0 auto;
+}
+
+.formContainer h2, h3 {
+    color: black;
+}

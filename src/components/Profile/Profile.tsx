@@ -35,6 +35,7 @@ const Profile = (props: ProfileProps & {isOwner: boolean}) => {
                                  status={props.status}
                                  updateStatus={props.updateStatus}
                                  updateProfileData={props.updateProfileData}
+                                 isOwner={props.isOwner}
                     />
                     <MyPostsContainer/>
                 </div>

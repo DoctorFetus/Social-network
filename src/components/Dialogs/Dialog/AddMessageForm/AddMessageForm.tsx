@@ -1,8 +1,9 @@
 import React from 'react';
 import s from './AddMessageForm.module.css'
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import {Textarea} from "../../../common/FormsControl/FormsControl";
+import {FormControl} from "../../../common/FormsControl/FormsControl";
 import {maxLength, required} from "../../../../utils/validators/validators";
+import Button from "@mui/material/Button";
 
 export type AddMessageFormType = {
     newMessageBody: string
@@ -14,13 +15,12 @@ const AddMessageForm = (props: InjectedFormProps<AddMessageFormType>) => {
         <form className={s.sender} onSubmit={props.handleSubmit}>
             <Field
                 name={"newMessageBody"}
-                component={Textarea}
-                className={s.message_area}
+                component={FormControl}
                 placeholder={"Type message..."}
                 validate={[required, maxLength100]}
             />
-            <button
-                className={s.btn_send}>Send
+            <button>
+                <Button variant={"contained"}>send</Button>
             </button>
         </form>
     );

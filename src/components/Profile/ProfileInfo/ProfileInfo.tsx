@@ -3,7 +3,7 @@ import s from "./ProfileInfo.module.css"
 import {UserProfileType} from "../../../redux/redusers/profile-reducer";
 import ProfileStatus from "../ProfileStatus/ProfileStatus";
 import ProfileData from "./ProfileData/ProfileData";
-import ProfileDataForm, {ProfileFormDataType} from "./ProfileData/ProfileDataForm";
+import ProfileDataForm, {ProfileFormDataType} from "../../Settings/ProfileDataForm/ProfileDataForm";
 
 
 export type ProfileInfoType = {
@@ -11,24 +11,18 @@ export type ProfileInfoType = {
     status: string | null
     updateStatus: (status: string) => void
     updateProfileData: (profileData: UserProfileType) => Promise<string>
+    isOwner: boolean
 }
 
 const ProfileInfo = (props: ProfileInfoType) => {
 
-    const [editMode, setEditMode] = useState(false)
-
-    const changeEditMode = (isEditMode: boolean) => setEditMode(isEditMode)
 
     const handleSubmit = (formData: ProfileFormDataType) => {
         props.updateProfileData(formData)
-            .then(() => changeEditMode(false))
 
     }
     return <div className={s.container}>
-        {editMode
-            ? <ProfileDataForm initialValues={props.profile} onSubmit={handleSubmit}/>
-            : <ProfileData profile={props.profile} changeEditMode={changeEditMode}/>
-        }
+             <ProfileData profile={props.profile} isOwner={props.isOwner}/>
         <div>Status: <ProfileStatus status={props.status ? props.status : "null"} updateStatus={props.updateStatus}/>
         </div>
 

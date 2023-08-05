@@ -1,11 +1,12 @@
 import React from 'react';
 import {ContactsKeyType, UserProfileType} from "../../../../redux/redusers/profile-reducer";
 import {v1} from "uuid";
+import Button from "@mui/material/Button";
 
 
 type ProfileDataPropsType = {
     profile: UserProfileType,
-    changeEditMode: (isEditMode: boolean) => void
+    isOwner: boolean
 }
 
 const ProfileData = (props: ProfileDataPropsType) => {
@@ -14,7 +15,6 @@ const ProfileData = (props: ProfileDataPropsType) => {
 
     return (
         <div>
-            <button onClick={() => props.changeEditMode(true)}>edit</button>
             <div>Full name: {props.profile.fullName}</div>
             <div>Looking for a job: {props.profile.lookingForAJob ? "yes" : "no"}</div>
             {props.profile.lookingForAJob && <div>Skills: {isPropertyUnspecified(props.profile.lookingForAJobDescription)}</div>}

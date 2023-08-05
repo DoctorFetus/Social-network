@@ -2,7 +2,9 @@ import React from 'react';
 import s from "./AddPostForm.module.css";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {maxLength, required} from "../../../../utils/validators/validators";
-import {Textarea} from "../../../common/FormsControl/FormsControl";
+import Button from '@mui/material/Button';
+import {FormControl} from "../../../common/FormsControl/FormsControl";
+
 
 export type AddPostFormType = {
     newPostBody: string
@@ -13,12 +15,15 @@ const AddPostForm = (props: InjectedFormProps<AddPostFormType>) => {
     return (
         <form className={s.addNewPost} onSubmit={props.handleSubmit}>
             <Field
-                component={Textarea}
+                component={FormControl}
                 name={"newPostBody"}
                 placeholder={"What are you thinking about?"}
                 validate={[required, length]}
+                className={s.inputStyle}
             />
-            <button>Add post</button>
+            <button>
+                <Button variant={"contained"}>Add post</Button>
+            </button>
         </form>
         );
 };

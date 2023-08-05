@@ -15,6 +15,6 @@
 
 .app_wrapper_content {
     grid-area: content;
-    background: linear-gradient(0deg, rgb(255, 255, 255), rgb(10, 112, 230));
+    background: rgb(248,244,255);
 }
 

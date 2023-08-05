@@ -1,29 +1,42 @@
-import React, {ReactNode} from 'react';
+import React from 'react';
 import {WrappedFieldProps} from "redux-form";
-import style from "./FormControl.module.css"
+import TextField from '@mui/material/TextField';
+import Checkbox from '@mui/material/Checkbox';
 
-type ChildrenType = {
-    children: React.ReactNode
+
+interface FormsControlPropsType extends WrappedFieldProps {
+    type?: string
 }
-const FormControl = ({input, meta: {touched, error}, children, ...restProps}: WrappedFieldProps & ChildrenType) => {
 
-    const hasError = touched && error
-
-    return (
-        <div className={style.formControl + " " + (hasError ?  style.error : "")}>
-            <div >
-                {children}
-            </div>
-            {hasError && <span>{error}</span>}
-        </div>
-    );
-}
-export const Textarea = (props: WrappedFieldProps) => {
+// type ChildrenType = {
+//     children: React.ReactNode
+// }
+// const FormControl = ({input, meta: {touched, error}, children, ...restProps}: WrappedFieldProps & ChildrenType) => {
+//
+//     const hasError = touched && error
+//
+//     return (
+//         <div className={style.formControl + " " + (hasError ?  style.error : "")}>
+//             <div >
+//                 {children}
+//             </div>
+//             {hasError && <span>{error}</span>}
+//         </div>
+//     );
+// }
+export const FormControl = (props: FormsControlPropsType) => {
     const {input, meta, ...restProps} = props
-    return <FormControl {...props}><textarea {...input} {...restProps}/></FormControl>
+    // return <FormControl {...props}><TextField {...input} {...restProps}/></FormControl>
+    const hasError = props.meta.touched && props.meta.error
+    const fieldLabel = !!hasError ? hasError : ""
+
+    if (restProps.type === "checkbox") {
+        return <Checkbox color={"secondary"} />
+    }
+    return <TextField {...input} {...restProps} error={!!hasError} label={fieldLabel}/>
 };
 
-export const Input = (props: WrappedFieldProps) => {
-    const {input, meta, ...restProps} = props
-    return <FormControl {...props}><input {...input} {...restProps}/></FormControl>
-};
+// export const Input = (props: WrappedFieldProps) => {
+//     const {input, meta, ...restProps} = props
+//     return <FormControl {...props}><TextField {...input} {...restProps}/></FormControl>
+// };

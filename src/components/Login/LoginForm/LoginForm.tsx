@@ -1,8 +1,9 @@
 import React from 'react';
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import {Input} from "../../common/FormsControl/FormsControl";
+import {FormControl} from "../../common/FormsControl/FormsControl";
 import {required} from "../../../utils/validators/validators";
 import style from "./../../common/FormsControl/FormControl.module.css"
+import Button from "@mui/material/Button";
 
 export type FormDataType = {
     email: string,
@@ -21,33 +22,35 @@ const LoginForm = ({error, handleSubmit, captchaUrl}: InjectedFormProps<FormData
             {error && <div className={style.formSummaryError}>{error}</div>}
             <form onSubmit={handleSubmit}>
                 <div>
-                    <Field component={Input}
+                    <Field component={FormControl}
                            name={"email"}
                            placeholder={"Login"}
                     />
                 </div>
                 <div>
                     <Field
-                        component={Input}
+                        component={FormControl}
                         name={"password"}
                         type={"password"}
                         validate={[required]}
                         placeholder={"Password"}/>
                 </div>
-                <div>
-                    <Field component={Input} name={"rememberMe"} type="checkbox"/> remember me
-                </div>
+                <label>
+                    <Field component={FormControl} name={"rememberMe"} type="checkbox"/> Remember me
+                </label>
                 { captchaUrl &&
                     <>
                     <img src={captchaUrl} alt={"captcha"}/>
                         <Field
-                            component={Input}
+                            component={FormControl}
                             name={"captcha"}
                             validate={[required]}
                             placeholder={"captcha"}/>
                     </>}
                 <div>
-                    <button>Login</button>
+                    <button>
+                        <Button variant={"contained"}>Login</Button>
+                    </button>
                 </div>
             </form>
         </>
