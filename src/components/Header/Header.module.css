@@ -1,10 +1,10 @@
 .header {
     grid-area: head;
-    background: linear-gradient(180deg, #c2f9e2,#00c4fd);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 40px;
+    /*background: linear-gradient(180deg, #c2f9e2,#00c4fd);*/
+    /*display: flex;*/
+    /*justify-content: space-between;*/
+    /*align-items: center;*/
+    /*padding: 0 40px;*/
 }
 
 .logo {

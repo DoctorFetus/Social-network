@@ -1,10 +1,14 @@
 import React from "react";
-import Header from "./Header";
 import {connect} from "react-redux";
-import {AuthType, logout} from "../../redux/redusers/auth-reducer";
+import {logout} from "../../redux/redusers/auth-reducer";
 import {StoreType} from "../../redux/store";
+import ButtonAppBar from "./Header2";
+import {UserProfileType} from "../../redux/redusers/profile-reducer";
 
-type MapStateToPropsType = AuthType
+type MapStateToPropsType = {
+    isAuth: boolean,
+    profile: UserProfileType | null
+}
 type MapDispatchToPropsType = {
     logout: () => void
 }
@@ -14,16 +18,15 @@ export type HeaderPropsType = MapDispatchToPropsType & MapStateToPropsType
 class HeaderContainer extends React.Component<HeaderPropsType> {
 
     render() {
-        return <Header {...this.props}/>
+        // return <Header {...this.props}/>
+        return <ButtonAppBar {...this.props}/>
     }
 }
 
 const mapStateToProps = (state: StoreType): MapStateToPropsType => ({
-    id: state.auth.id,
-    login: state.auth.login,
-    email: state.auth.email,
     isAuth: state.auth.isAuth,
-    captchaUrl: state.auth.captchaUrl
+    profile: state.profilePage.profile
+
 })
 
 export default connect(mapStateToProps, {logout})(HeaderContainer);

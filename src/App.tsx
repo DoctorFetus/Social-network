@@ -3,7 +3,6 @@ import './App.css';
 import HeaderContainer from "./components/Header/HeaderContainer";
 import {BrowserRouter, Redirect, Route, Switch} from "react-router-dom";
 import News from "./components/News/News";
-import Music from "./components/Music/Music";
 import Navbar from "./components/Navbar/Navbar";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import LoginContainer from "./components/Login/LoginContainer";
@@ -50,8 +49,6 @@ class App extends React.Component<AppPropsType> {
                             <Route path="/dialogs" render={() => <DialogsContainer/>}/>
 
                             <Route path="/news" render={() => <News/>}/>
-
-                            <Route path="/music" render={() => <Music/>}/>
 
                             <Route path="/settings" render={() => <SettingsContainer/>}/>
 
