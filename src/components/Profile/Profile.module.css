@@ -1,6 +1,7 @@
+
 .content {
-    position: relative;
-    /*margin-bottom: 75px;*/
+    display: flex;
+    gap: 20px;
 }
 
 .wallpaper {
@@ -9,20 +10,21 @@
     object-fit: cover;
 }
 
-.avatar {
-    position: absolute;
-    left: 50px;
-    top: 170px;
+.avatarImage {
     border-radius: 50%;
     height: 150px;
     width: auto;
     border: 4px white solid;
 }
 
-.blocks {
-    display: flex;
-}
-
 .chooseFile {
     margin-top: 100px;
+}
+
+.avatarImage {
+    position: relative;
+}
+
+.avatar {
+    margin: 0 auto;
 }

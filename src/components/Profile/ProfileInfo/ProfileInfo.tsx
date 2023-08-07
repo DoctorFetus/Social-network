@@ -1,9 +1,10 @@
-import React, {useState} from "react";
+import React from "react";
 import s from "./ProfileInfo.module.css"
 import {UserProfileType} from "../../../redux/redusers/profile-reducer";
 import ProfileStatus from "../ProfileStatus/ProfileStatus";
 import ProfileData from "./ProfileData/ProfileData";
-import ProfileDataForm, {ProfileFormDataType} from "../../Settings/ProfileDataForm/ProfileDataForm";
+import {ProfileFormDataType} from "../../Settings/ProfileDataForm/ProfileDataForm";
+import Typography from '@mui/material/Typography';
 
 
 export type ProfileInfoType = {
@@ -16,15 +17,12 @@ export type ProfileInfoType = {
 
 const ProfileInfo = (props: ProfileInfoType) => {
 
-
-    const handleSubmit = (formData: ProfileFormDataType) => {
-        props.updateProfileData(formData)
-
-    }
     return <div className={s.container}>
-             <ProfileData profile={props.profile} isOwner={props.isOwner}/>
+        <Typography variant={"h5"}>{props.profile.fullName}</Typography>
         <div>Status: <ProfileStatus status={props.status ? props.status : "null"} updateStatus={props.updateStatus}/>
         </div>
+        <ProfileData profile={props.profile} isOwner={props.isOwner}/>
+
 
     </div>
 }

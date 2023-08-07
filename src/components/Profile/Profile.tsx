@@ -6,12 +6,14 @@ import profileWallpaper from "../../assets/images/profileWallpaper.jpg";
 import userPhoto from "../../assets/images/userPhoto.jpg";
 import {ProfileProps} from "./ProfileContainer";
 import Preloader from "../common/Preloader/Preloader";
+import IconButton from "@mui/material/IconButton";
+import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 
 
-const Profile = (props: ProfileProps & {isOwner: boolean}) => {
+const Profile = (props: ProfileProps & { isOwner: boolean }) => {
 
     if (!props.profile) {
-        return <Preloader />
+        return <Preloader/>
     }
 
     const onFileChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -22,21 +24,36 @@ const Profile = (props: ProfileProps & {isOwner: boolean}) => {
     }
 
     return (
-        <div>
-            <div className={s.container}>
+        <div className={s.container}>
+            <img className={s.wallpaper} src={profileWallpaper}
+                 alt="status_bg"/>
             <div className={s.content}>
-                <img className={s.wallpaper} src={profileWallpaper}
-                     alt="status_bg"/>
-                <img className={s.avatar} src={props.profile.photos.large || userPhoto} alt={"avatar"} />
-                {props.isOwner && <input onChange={onFileChange} className={s.chooseFile} type="file"/>}
-            </div>
-                <div className={s.blocks}>
-                    <ProfileInfo profile={props.profile}
-                                 status={props.status}
-                                 updateStatus={props.updateStatus}
-                                 updateProfileData={props.updateProfileData}
-                                 isOwner={props.isOwner}
-                    />
+                <div className={s.profileBlock}>
+                    <div className={s.avatar}>
+                        <img className={s.avatarImage} src={props.profile.photos.large || userPhoto} alt={"avatar"}/>
+                        {props.isOwner && <>
+                            <IconButton aria-label="delete" size="small"
+                                        style={{
+                                            "marginLeft": "-45px"
+                            }}>
+                                <label>
+                                    <AddAPhotoIcon fontSize="medium"/>
+                                    <input id="fileBtn" onChange={onFileChange} style={{"display": "none"}}
+                                           className={s.chooseFile} type="file"/>
+                                </label>
+                            </IconButton>
+                        </>}
+                    </div>
+                    <div className={s.blocks}>
+                        <ProfileInfo profile={props.profile}
+                                     status={props.status}
+                                     updateStatus={props.updateStatus}
+                                     updateProfileData={props.updateProfileData}
+                                     isOwner={props.isOwner}
+                        />
+                    </div>
+                </div>
+                <div className={s.postsBlock}>
                     <MyPostsContainer/>
                 </div>
             </div>

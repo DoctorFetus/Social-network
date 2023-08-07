@@ -12,6 +12,7 @@ import store, {StoreType} from "./redux/store";
 import Preloader from "./components/common/Preloader/Preloader";
 import UsersContainer from "./components/Users/UsersContainer";
 import SettingsContainer from "./components/Settings/SettingsContainer";
+import SelectedListItem from "./components/Navbar/Navbar2";
 
 const DialogsContainer = lazy(() => import("./components/Dialogs/DialogsContainer"));
 
@@ -38,7 +39,8 @@ class App extends React.Component<AppPropsType> {
         return (
             <div className="app_wrapper">
                 <HeaderContainer/>
-                <Navbar/>
+                {/*<Navbar/>*/}
+                <SelectedListItem/>
                 <div className="app_wrapper_content">
                     <Suspense fallback={<Preloader/>}>
                         <Switch>
