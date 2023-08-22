@@ -3,7 +3,6 @@ import s from "./ProfileInfo.module.css"
 import {UserProfileType} from "../../../redux/redusers/profile-reducer";
 import ProfileStatus from "../ProfileStatus/ProfileStatus";
 import ProfileData from "./ProfileData/ProfileData";
-import {ProfileFormDataType} from "../../Settings/ProfileDataForm/ProfileDataForm";
 import Typography from '@mui/material/Typography';
 
 
@@ -15,10 +14,11 @@ export type ProfileInfoType = {
     isOwner: boolean
 }
 
+
 const ProfileInfo = (props: ProfileInfoType) => {
 
     return <div className={s.container}>
-        <Typography variant={"h5"}>{props.profile.fullName}</Typography>
+        <div className={s.name}>{props.profile.fullName}</div>
         <div>Status: <ProfileStatus status={props.status ? props.status : "null"} updateStatus={props.updateStatus}/>
         </div>
         <ProfileData profile={props.profile} isOwner={props.isOwner}/>
