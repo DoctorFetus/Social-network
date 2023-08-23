@@ -3,12 +3,13 @@ import {UsersPropsType} from "./UsersContainer";
 import Paginator from "../common/Pagination/Paginator";
 import User from "./User/User";
 import Preloader from "../common/Preloader/Preloader";
+import s from './Users.module.css'
 
 const Users = ({currentPage, pageSize, totalUsersCount, onPageChanged, ...props}: UsersPropsType & {
     onPageChanged: (page: number) => void
 }) => {
     return (
-        <div>
+        <div className={s.container}>
 
             <Paginator currentPage={currentPage}
                        pageSize={pageSize}

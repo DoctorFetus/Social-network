@@ -2,7 +2,7 @@ import React from "react";
 import {connect} from "react-redux";
 import {logout} from "../../redux/redusers/auth-reducer";
 import {StoreType} from "../../redux/store";
-import ButtonAppBar from "./Header2";
+import ButtonAppBar from "./Header";
 import {UserProfileType} from "../../redux/redusers/profile-reducer";
 
 type MapStateToPropsType = {

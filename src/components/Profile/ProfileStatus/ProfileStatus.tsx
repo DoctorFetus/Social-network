@@ -1,5 +1,8 @@
 import React, {ChangeEvent} from 'react';
 import {ProfileInfoType} from "../ProfileInfo/ProfileInfo";
+import {Input, ListItem} from "@mui/material";
+import Typography from "@mui/material/Typography";
+import ShortTextIcon from '@mui/icons-material/ShortText';
 
 type ProfileStatusStateType = {
     editMode: boolean,
@@ -45,14 +48,17 @@ class ProfileStatus extends React.Component<ProfileStatusPropsType, any> {
     }
 
     render() {
-        return <span>
-            {!this.state.editMode
-                ? <span onDoubleClick={() => this.activateEditMode()}>{this.state.currentStatus}</span>
-                : <input onChange={this.onChangeHandler}
+        return <ListItem>
+                {!this.state.editMode
+                ? <Typography style={{display: "flex", alignItems: 'center', gap: '10px'}}
+                        onDoubleClick={() => this.activateEditMode()}>
+                        <ShortTextIcon/>{this.state.currentStatus}
+                </Typography>
+                : <Input onChange={this.onChangeHandler}
                          onBlur={() => this.deactivateEditMode()}
                          autoFocus
                          value={this.state.currentStatus}/>}
-        </span>
+        </ListItem>
     }
 }
 

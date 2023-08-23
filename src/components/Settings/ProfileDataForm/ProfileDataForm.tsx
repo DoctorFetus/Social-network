@@ -28,7 +28,9 @@ const ProfileDataForm = ({error, initialValues, handleSubmit}: InjectedFormProps
                         </div>
                         <div className={cn([s.oneForm], s.checkbox)}>
                             Looking for a job: <Field name={"lookingForAJob"} type={"checkbox"}
-                                                      component={FormControl}/>
+                                                      component={FormControl}
+                                                      checked={initialValues.lookingForAJob}
+                        />
                         </div>
                         <div className={s.oneForm}>
                             Skills: <Field name={"lookingForAJobDescription"} size={"small"} component={FormControl}/>

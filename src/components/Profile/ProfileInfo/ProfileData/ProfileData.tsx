@@ -6,7 +6,7 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import InfoIcon from '@mui/icons-material/Info';
+import {ListItem} from "@mui/material";
 
 
 type ProfileDataPropsType = {
@@ -14,13 +14,13 @@ type ProfileDataPropsType = {
     isOwner: boolean
 }
 
+
 const ProfileData = (props: ProfileDataPropsType) => {
 
-    const isPropertyUnspecified = (prop: string) => prop ? prop : "unspecified"
+    const isPropertyUnspecified = (prop: string) => prop ? prop : "???"
 
     return (
         <div>
-            {/*<div>Full name: {props.profile.fullName}</div>*/}
             <Accordion>
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon/>}
@@ -31,13 +31,13 @@ const ProfileData = (props: ProfileDataPropsType) => {
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
-                        <Typography>Looking for a job: {props.profile.lookingForAJob ? "yes" : "no"}</Typography>
+                        <ListItem>Looking for a job: {props.profile.lookingForAJob ? "yes" : "no"}</ListItem>
                         {props.profile.lookingForAJob &&
-                            <Typography>Skills: {isPropertyUnspecified(props.profile.lookingForAJobDescription)}</Typography>}
-                        <Typography>About me: {isPropertyUnspecified(props.profile.aboutMe)}</Typography>
+                            <ListItem>Skills: {isPropertyUnspecified(props.profile.lookingForAJobDescription)}</ListItem>}
+                        <ListItem>About me: {isPropertyUnspecified(props.profile.aboutMe)}</ListItem>
                         {Object.keys(props.profile.contacts).map((key) => {
-                            return <Typography
-                                key={v1()}>{key}: {isPropertyUnspecified(props.profile.contacts[key as ContactsKeyType])}</Typography>
+                            return <ListItem
+                                key={v1()}>{key}: {isPropertyUnspecified(props.profile.contacts[key as ContactsKeyType])}</ListItem>
                         })}
                     </Typography>
                 </AccordionDetails>

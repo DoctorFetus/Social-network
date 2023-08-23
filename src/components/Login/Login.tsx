@@ -13,7 +13,6 @@ const Login = (props: LoginType) => {
 
     return (
         <div>
-            <h1>LOGIN</h1>
             <LoginReduxForm captchaUrl={props.captchaUrl} onSubmit={onSubmitHandler}/>
         </div>
 

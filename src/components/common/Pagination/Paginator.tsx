@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import s from './Paginator.module.css';
+import Pagination from '@mui/material/Pagination';
 
 type PaginatorPropsType = {
     currentPage: number,
@@ -27,7 +28,8 @@ const Paginator = ({currentPage, pageSize, totalUsersCount, onPageChanged, porti
 
     const btnClass = `${s.pageSelector} ${s.btn}`
 
-    return (<div className={s.paginator}>
+    return (
+        <div className={s.paginator}>
 
             {portionNumber > 1 &&
                 <button className={btnClass} onClick={() => setPortionNumber(portionNumber - 1)}>{"<"}</button>}

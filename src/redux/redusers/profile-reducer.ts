@@ -40,7 +40,7 @@ export type ProfilePageType = {
 
 const initialState: ProfilePageType = {
     posts: [
-        {id: v1(), message: "Hi, how are you?", likeCounter: 15},
+        {id: v1(), message: "Current API version don't support posts", likeCounter: 15},
         {id: v1(), message: "I am dead inside", likeCounter: 25}
     ],
     profile: null,
@@ -148,7 +148,6 @@ export const updateProfileData = (newProfileData: Partial<UserProfileType>) =>
          const leftBorder = error.lastIndexOf(">")
          const rightBorder = error.lastIndexOf(")")
          const errorFormName = (error.substring(leftBorder + 1, rightBorder)).toLowerCase()
-         // dispatch(stopSubmit("profileData", {contacts: {[errorFormName]: error}}))
          dispatch(stopSubmit("profileData", {_error: error}))
          await Promise.reject(error)
      }

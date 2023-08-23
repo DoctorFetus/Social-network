@@ -2,8 +2,6 @@ import React, {lazy, Suspense} from 'react';
 import './App.css';
 import HeaderContainer from "./components/Header/HeaderContainer";
 import {BrowserRouter, Redirect, Route, Switch} from "react-router-dom";
-import News from "./components/News/News";
-import Navbar from "./components/Navbar/Navbar";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import LoginContainer from "./components/Login/LoginContainer";
 import {connect, Provider} from "react-redux";
@@ -12,7 +10,7 @@ import store, {StoreType} from "./redux/store";
 import Preloader from "./components/common/Preloader/Preloader";
 import UsersContainer from "./components/Users/UsersContainer";
 import SettingsContainer from "./components/Settings/SettingsContainer";
-import SelectedListItem from "./components/Navbar/Navbar2";
+import Navbar from "./components/Navbar/Navbar";
 
 const DialogsContainer = lazy(() => import("./components/Dialogs/DialogsContainer"));
 
@@ -39,8 +37,7 @@ class App extends React.Component<AppPropsType> {
         return (
             <div className="app_wrapper">
                 <HeaderContainer/>
-                {/*<Navbar/>*/}
-                <SelectedListItem/>
+                {this.props.isAuth && <Navbar/>}
                 <div className="app_wrapper_content">
                     <Suspense fallback={<Preloader/>}>
                         <Switch>
@@ -49,8 +46,6 @@ class App extends React.Component<AppPropsType> {
                             <Route path="/profile/:userId?" render={() => <ProfileContainer/>}/>
 
                             <Route path="/dialogs" render={() => <DialogsContainer/>}/>
-
-                            <Route path="/news" render={() => <News/>}/>
 
                             <Route path="/settings" render={() => <SettingsContainer/>}/>
 
@@ -72,12 +67,14 @@ type MapDispatchToPropsType = {
 
 type MapStateToPropsType = {
     initialized: boolean
+    isAuth: boolean
 }
 
 type AppPropsType = MapStateToPropsType & MapDispatchToPropsType
 
 const mapStateToProps = (state: StoreType): MapStateToPropsType => ({
-    initialized: state.app.initialized
+    initialized: state.app.initialized,
+    isAuth: state.auth.isAuth
 })
 
 const AppContainer = connect(mapStateToProps, {initializeApp})(App)

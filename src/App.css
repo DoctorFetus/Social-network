@@ -9,12 +9,12 @@
 
     grid-template-rows: 70px 1fr;
     grid-template-columns: 2fr 10fr;
-    grid-gap: 10px;
+    grid-gap: 0;
 }
 
 
 .app_wrapper_content {
     grid-area: content;
-    background: rgb(248,244,255);
+    /*background: rgb(248,244,255);*/
 }
 
