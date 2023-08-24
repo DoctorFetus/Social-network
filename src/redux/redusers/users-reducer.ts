@@ -9,8 +9,8 @@ export type UserType = {
     status: string,
     followed: boolean,
     photos: {
-        small: string
-        large: string
+        small: string | null
+        large: string | null
     }
 }
 
