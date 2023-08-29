@@ -2,18 +2,18 @@ import React, {lazy, Suspense} from 'react';
 import './App.css';
 import HeaderContainer from "./components/Header/HeaderContainer";
 import {BrowserRouter, Redirect, Route, Switch} from "react-router-dom";
-import ProfileContainer from "./components/Profile/ProfileContainer";
-import LoginContainer from "./components/Login/LoginContainer";
 import {connect, Provider} from "react-redux";
 import {initializeApp} from "./redux/redusers/app-reducer";
 import store, {StoreType} from "./redux/store";
 import Preloader from "./components/common/Preloader/Preloader";
-import UsersContainer from "./components/Users/UsersContainer";
-import SettingsContainer from "./components/Settings/SettingsContainer";
 import Navbar from "./components/Navbar/Navbar";
 
-const DialogsContainer = lazy(() => import("./components/Dialogs/DialogsContainer"));
 
+const UsersContainer = lazy(() => import('./components/Users/UsersContainer'))
+const DialogsContainer = lazy(() => import("./components/Dialogs/DialogsContainer"));
+const LoginContainer = lazy(() => import('./components/Login/LoginContainer'))
+const ProfileContainer = lazy(() => import("./components/Profile/ProfileContainer"))
+const SettingsContainer = lazy(() => import('./components/Settings/SettingsContainer'))
 
 class App extends React.Component<AppPropsType> {
 

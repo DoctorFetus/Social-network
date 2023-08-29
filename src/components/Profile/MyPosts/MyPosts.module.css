@@ -2,10 +2,15 @@
     padding: 10px;
 }
 
+.content {
+    padding: 20px 12px;
+}
+
 .title {
     text-align: center;
     font-weight: 500;
     font-size: 23px;
+    margin-bottom: 20px;
 }
 
 .posts {

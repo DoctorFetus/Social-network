@@ -41,7 +41,7 @@ export type ProfilePageType = {
 const initialState: ProfilePageType = {
     posts: [
         {id: v1(), message: "Current API version don't support posts", likeCounter: 15},
-        {id: v1(), message: "I am dead inside", likeCounter: 25}
+        {id: v1(), message: "Click twice on the status to change it", likeCounter: 25}
     ],
     profile: null,
     status: null

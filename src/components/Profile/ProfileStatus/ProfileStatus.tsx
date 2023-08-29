@@ -12,10 +12,11 @@ type ProfileStatusStateType = {
 type ProfileStatusPropsType = {
     status: string | null
     updateStatus: (status: string) => void
+    isOwner: boolean
 }
 
 class ProfileStatus extends React.Component<ProfileStatusPropsType, any> {
-    state =  {
+    state = {
         editMode: false,
         currentStatus: this.props.status!
     }
@@ -27,9 +28,11 @@ class ProfileStatus extends React.Component<ProfileStatusPropsType, any> {
     }
 
     activateEditMode = () => {
-        this.setState({
-            editMode: true
-        })
+        if (this.props.isOwner) {
+            this.setState({
+                editMode: true
+            })
+        }
     }
 
     deactivateEditMode = () => {
@@ -49,10 +52,10 @@ class ProfileStatus extends React.Component<ProfileStatusPropsType, any> {
 
     render() {
         return <ListItem>
-                {!this.state.editMode
+            {!this.state.editMode
                 ? <Typography style={{display: "flex", alignItems: 'center', gap: '10px'}}
-                        onDoubleClick={() => this.activateEditMode()}>
-                        <ShortTextIcon/>{this.state.currentStatus}
+                              onDoubleClick={() => this.activateEditMode()}>
+                    <ShortTextIcon/>{this.state.currentStatus}
                 </Typography>
                 : <Input onChange={this.onChangeHandler}
                          onBlur={() => this.deactivateEditMode()}

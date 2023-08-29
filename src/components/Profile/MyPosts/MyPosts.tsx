@@ -3,6 +3,8 @@ import s from "./MyPosts.module.css"
 import Posts from "./Posts/Posts";
 import {MypPostsPropsType} from "./MyPostsContainer";
 import AddPostForm, {AddPostFormType} from "./AddPostForm/AddPostForm";
+import Paper from "@mui/material/Paper";
+import Typography from "@mui/material/Typography";
 
 const MyPosts = React.memo((props: MypPostsPropsType) => {
     let postsElements = props.posts.map(p =>
@@ -19,12 +21,17 @@ const MyPosts = React.memo((props: MypPostsPropsType) => {
 
     return (
         <div className={s.container}>
-            <h3 className={s.title}>Posts</h3>
-            <AddPostForm onSubmit={addPost}/>
-            <div className={s.posts}>
-                {postsElements}
-            </div>
+            <Paper elevation={1}>
+                <div className={s.content}>
+                <Typography  variant={"h3"} className={s.title}>Posts</Typography>
+                <AddPostForm onSubmit={addPost}/>
+                <div className={s.posts}>
+                    {postsElements}
+                </div>
+                </div>
+            </Paper>
         </div>
+
     );
 })
 

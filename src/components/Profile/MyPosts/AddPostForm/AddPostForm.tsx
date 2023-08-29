@@ -10,7 +10,7 @@ export type AddPostFormType = {
     newPostBody: string
 }
 
-const length = maxLength(10)
+const length = maxLength(100)
 const AddPostForm = (props: InjectedFormProps<AddPostFormType>) => {
     return (
         <form className={s.addNewPost} onSubmit={props.handleSubmit}>
@@ -21,7 +21,7 @@ const AddPostForm = (props: InjectedFormProps<AddPostFormType>) => {
                 validate={[required, length]}
                 className={s.inputStyle}
             />
-            <button>
+            <button className={s.btn}>
                 <Button variant={"contained"}>Add post</Button>
             </button>
         </form>

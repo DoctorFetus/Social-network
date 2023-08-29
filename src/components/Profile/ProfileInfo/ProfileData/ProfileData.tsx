@@ -21,7 +21,7 @@ const ProfileData = (props: ProfileDataPropsType) => {
 
     return (
         <div>
-            <Accordion>
+            <Accordion sx={{maxWidth: "240px"}}>
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon/>}
                     aria-controls="panel1a-content"

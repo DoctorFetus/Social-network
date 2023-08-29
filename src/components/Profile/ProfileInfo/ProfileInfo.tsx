@@ -18,7 +18,7 @@ const ProfileInfo = (props: ProfileInfoType) => {
 
     return <div className={s.container}>
         <div className={s.name}>{props.profile.fullName}</div>
-        <ProfileStatus status={props.status ? props.status : "null"} updateStatus={props.updateStatus}/>
+        <ProfileStatus status={props.status ? props.status : "null"} updateStatus={props.updateStatus} isOwner={props.isOwner}/>
         <ProfileData profile={props.profile} isOwner={props.isOwner}/>
 
 
