@@ -4,12 +4,15 @@ import Paginator from "../common/Pagination/Paginator";
 import User from "./User/User";
 import Preloader from "../common/Preloader/Preloader";
 import s from './Users.module.css'
+import {Formik} from "formik";
 
 const Users = ({currentPage, pageSize, totalUsersCount, onPageChanged, ...props}: UsersPropsType & {
     onPageChanged: (page: number) => void
 }) => {
     return (
         <div className={s.container}>
+
+            <UserSearchForm />
 
             <Paginator currentPage={currentPage}
                        pageSize={pageSize}
@@ -32,6 +35,26 @@ const Users = ({currentPage, pageSize, totalUsersCount, onPageChanged, ...props}
                 )
             }
         </div>)
+}
+
+const usersSearchFormValidate = (values: any) => {
+    return {}
+}
+
+const submit = (values: any, {setSubmitting}: any) => {
+}
+
+const UserSearchForm = () => {
+    return <div>
+        <Formik
+        initialValues={{term: ''}}
+        validate={usersSearchFormValidate}
+        onSubmit={submit}
+        >
+
+        </Formik>
+
+    </div>
 }
 
 export default Users;
