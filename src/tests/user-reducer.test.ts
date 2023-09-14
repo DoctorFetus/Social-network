@@ -43,7 +43,8 @@ beforeEach(() => {
         totalUsersCount: 0,
         currentPage: 1,
         isFetching: false,
-        followingFilter: []
+        followingFilter: [],
+        filter: {term: '', friend: null}
     }
 })
 

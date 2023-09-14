@@ -1,8 +1,8 @@
-    import axios from "axios";
-    import {FormDataType} from "../components/Login/LoginForm/LoginForm";
-    import {UserProfileType} from "../redux/redusers/profile-reducer";
+import axios from "axios";
+import {FormDataType} from "../components/Login/LoginForm/LoginForm";
+import {UserProfileType} from "../redux/redusers/profile-reducer";
 
-    const instance = axios.create({
+const instance = axios.create({
         baseURL: 'https://social-network.samuraijs.com/api/1.0/',
         withCredentials: true,
         headers: {
@@ -11,8 +11,10 @@
     })
 
     export const usersAPI = {
-        getUsers(currentPage: number = 0, pageSize: number = 4) {
-            return instance.get(`users?page=${currentPage}&count=${pageSize}`)
+        getUsers(currentPage: number = 0, pageSize: number = 4, term: string = '', friends: null | boolean = null) {
+            
+            return instance.get(`users?page=${currentPage}&count=${pageSize}&term=${term}`
+                + (friends === null ? '' : `&friend=${friends}` ))
                 .then(response => response.data)
         },
         unfollowUser(userID: number) {

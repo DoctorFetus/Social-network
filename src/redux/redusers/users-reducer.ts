@@ -2,19 +2,7 @@ import {Dispatch} from "redux";
 import {usersAPI} from "../../api/api";
 import {updateObjectInArray} from "../../utils/object-helpers";
 
-export type UserType = {
-    name: string
-    id: number
-    uniqueUrlName: null
-    status: string,
-    followed: boolean,
-    photos: {
-        small: string | null
-        large: string | null
-    }
-}
 
-export type UsersPageType = typeof initialState
 
 const initialState = {
     users: [] as Array<UserType>,
@@ -22,7 +10,11 @@ const initialState = {
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: false,
-    followingFilter: [] as Array<number>
+    followingFilter: [] as Array<number>,
+    filter: {
+        term: '',
+        friend: null as null | boolean
+    }
 }
 
 const usersReducer = (state = initialState, action: UserReducerActionType): UsersPageType => {
@@ -39,6 +31,8 @@ const usersReducer = (state = initialState, action: UserReducerActionType): User
             return {...state, totalUsersCount: action.payload.usersCount}
         case "TOGGLE-IS-FETCHING":
             return {...state, isFetching: action.payload.isFetching}
+        case "SET-FILTER":
+            return {...state, filter: {...state.filter, ...action.payload}}
         case "TOGGLE-IS-FOLLOWING":
             return action.payload.isFollowing
                 ? {...state, followingFilter: [...state.followingFilter, action.payload.userID]}
@@ -48,9 +42,41 @@ const usersReducer = (state = initialState, action: UserReducerActionType): User
     }
 }
 
+// thunks
+export const requestUsers = (currentPage: number, pageSize: number, filter: FilterType) => async (dispatch: Dispatch) => {
+    
+    dispatch(toggleIsFetching(true))
+    dispatch(setCurrentPage(currentPage))
+    dispatch(setFiler(filter))
+    const response = await usersAPI.getUsers(currentPage, pageSize, filter.term, filter.friend)
+    dispatch(setUsers(response.items))
+    dispatch(setTotalUsersCount(response.totalCount))
+    dispatch(toggleIsFetching(false))
+}
+
+export const acceptFollowUser = (userId: number) => async (dispatch: Dispatch) => {
+    dispatch(toggleIsFollowing(userId, true))
+    const response = await usersAPI.followUser(userId)
+    if (!response.resultCode) {
+        dispatch(followUnfollowUser(userId, true))
+    }
+    dispatch(toggleIsFollowing(userId, false))
+}
+
+export const acceptUnfollowUser = (userId: number) => async (dispatch: Dispatch) => {
+    dispatch(toggleIsFollowing(userId, true))
+    const response = await usersAPI.unfollowUser(userId)
+    if (!response.resultCode) {
+        dispatch(followUnfollowUser(userId, false))
+    }
+    dispatch(toggleIsFollowing(userId, false))
+}
+
+
+// action creators
 export type UserReducerActionType =
     SetUsersType | FollowUnfollowUserType
-    | SetCurrentPageType | SetTotalUsersCountType | ToggleIsFetchingType | ToggleIsFollowingType
+    | SetCurrentPageType | SetTotalUsersCountType | ToggleIsFetchingType | ToggleIsFollowingType | SetFilter
 
 type FollowUnfollowUserType = ReturnType<typeof followUnfollowUser>
 export const followUnfollowUser = (userID: number, isFollow: boolean) => {
@@ -96,33 +122,27 @@ export const toggleIsFollowing = (userID: number, isFollowing: boolean) => {
         payload: {userID, isFollowing}
     } as const
 }
-
-export const requestUsers = (currentPage: number, pageSize: number) => async (dispatch: Dispatch) => {
-    dispatch(toggleIsFetching(true))
-    const response = await usersAPI.getUsers(currentPage, pageSize)
-    dispatch(setCurrentPage(currentPage))
-    dispatch(setUsers(response.items))
-    dispatch(setTotalUsersCount(response.totalCount))
-    dispatch(toggleIsFetching(false))
+type SetFilter = ReturnType<typeof setFiler>
+export const setFiler = (filter: FilterType) => {
+    return {
+        type: 'SET-FILTER',
+        payload: {filter}
+    } as const
 }
 
-export const acceptFollowUser = (userId: number) => async (dispatch: Dispatch) => {
-    dispatch(toggleIsFollowing(userId, true))
-    const response = await usersAPI.followUser(userId)
-    if (!response.resultCode) {
-        dispatch(followUnfollowUser(userId, true))
+//types
+export type UserType = {
+    name: string
+    id: number
+    uniqueUrlName: null
+    status: string,
+    followed: boolean,
+    photos: {
+        small: string | null
+        large: string | null
     }
-    dispatch(toggleIsFollowing(userId, false))
 }
 
-export const acceptUnfollowUser = (userId: number) => async (dispatch: Dispatch) => {
-    dispatch(toggleIsFollowing(userId, true))
-    const response = await usersAPI.unfollowUser(userId)
-    if (!response.resultCode) {
-        dispatch(followUnfollowUser(userId, false))
-    }
-    dispatch(toggleIsFollowing(userId, false))
-}
-
-
+export type UsersPageType = typeof initialState
+export type FilterType = typeof initialState.filter
 export default usersReducer

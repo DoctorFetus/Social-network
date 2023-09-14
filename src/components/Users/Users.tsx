@@ -4,15 +4,17 @@ import Paginator from "../common/Pagination/Paginator";
 import User from "./User/User";
 import Preloader from "../common/Preloader/Preloader";
 import s from './Users.module.css'
-import {Formik} from "formik";
+import {UserSearchForm} from "./UserSearchForm";
+import {FilterType} from "../../redux/redusers/users-reducer";
 
-const Users = ({currentPage, pageSize, totalUsersCount, onPageChanged, ...props}: UsersPropsType & {
+const Users = ({currentPage, pageSize, totalUsersCount, onPageChanged, onFilterChanged, ...props}: UsersPropsType & {
     onPageChanged: (page: number) => void
+    onFilterChanged: (filter: FilterType) => void
 }) => {
     return (
         <div className={s.container}>
 
-            <UserSearchForm />
+            <UserSearchForm onFilterChanged={onFilterChanged}/>
 
             <Paginator currentPage={currentPage}
                        pageSize={pageSize}
@@ -35,26 +37,6 @@ const Users = ({currentPage, pageSize, totalUsersCount, onPageChanged, ...props}
                 )
             }
         </div>)
-}
-
-const usersSearchFormValidate = (values: any) => {
-    return {}
-}
-
-const submit = (values: any, {setSubmitting}: any) => {
-}
-
-const UserSearchForm = () => {
-    return <div>
-        <Formik
-        initialValues={{term: ''}}
-        validate={usersSearchFormValidate}
-        onSubmit={submit}
-        >
-
-        </Formik>
-
-    </div>
 }
 
 export default Users;

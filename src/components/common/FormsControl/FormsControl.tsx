@@ -10,7 +10,7 @@ interface FormsControlPropsType extends WrappedFieldProps {
 }
 
 export const FormControl = (props: FormsControlPropsType) => {
-    debugger
+    
     const {input, meta, ...restProps} = props
     const hasError = props.meta.touched && props.meta.error
     const fieldLabel = !!hasError ? hasError : ""

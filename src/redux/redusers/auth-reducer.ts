@@ -30,7 +30,7 @@ export const authReducer = (state = initialState, action: authReducerActionsType
                 ...action.payload,
             }
         case "SET_CAPTCHA_URL":
-            debugger
+            
             return {
                 ...state,
                 ...action.payload
@@ -71,7 +71,7 @@ export const loginIn = (formData: FormDataType) => async (dispatch: ThunkDispatc
     if (!response.resultCode) {
         await dispatch(getAuthUserData())
     } else {
-        debugger
+        
         if (response.resultCode === 10) {
             dispatch(getCaptchaUrl())
         }

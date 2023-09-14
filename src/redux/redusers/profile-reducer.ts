@@ -64,7 +64,7 @@ function profileReducer(state = initialState, action: ProfilePageActionType): Pr
         case "DELETE-POST":
             return {...state, posts: state.posts.filter(post => post.id !== action.payload.postId)}
         case "SAVE-NEW-PHOTO":
-            debugger
+            
             return {...state, profile: {...state.profile!, photos: {...action.payload.newPhoto}}}
         default:
             return state

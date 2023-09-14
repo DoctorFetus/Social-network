@@ -11,3 +11,5 @@ export const getCurrentPage = (state: StoreType) => state.usersPage.currentPage
 export  const getIsFetching = (state: StoreType) => state.usersPage.isFetching
 
 export  const getFollowingFilter = (state: StoreType) => state.usersPage.followingFilter
+
+export const getUsersFilter = (state: StoreType) => state.usersPage.filter
