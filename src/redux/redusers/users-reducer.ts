@@ -32,7 +32,7 @@ const usersReducer = (state = initialState, action: UserReducerActionType): User
         case "TOGGLE-IS-FETCHING":
             return {...state, isFetching: action.payload.isFetching}
         case "SET-FILTER":
-            return {...state, filter: {...state.filter, ...action.payload}}
+            return {...state, filter: { ...action.payload.filter}}
         case "TOGGLE-IS-FOLLOWING":
             return action.payload.isFollowing
                 ? {...state, followingFilter: [...state.followingFilter, action.payload.userID]}
@@ -44,7 +44,9 @@ const usersReducer = (state = initialState, action: UserReducerActionType): User
 
 // thunks
 export const requestUsers = (currentPage: number, pageSize: number, filter: FilterType) => async (dispatch: Dispatch) => {
-    
+
+    debugger
+
     dispatch(toggleIsFetching(true))
     dispatch(setCurrentPage(currentPage))
     dispatch(setFiler(filter))

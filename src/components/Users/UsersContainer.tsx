@@ -56,6 +56,7 @@ class UsersContainer extends React.Component<UsersPropsType, []> {
         this.props.getUsers(1, pageSize, filter)
     }
 
+
     render() {
         return  <Users {...this.props} onPageChanged={this.onPageChanged} onFilterChanged={this.onFilterChanged}/>
     }
