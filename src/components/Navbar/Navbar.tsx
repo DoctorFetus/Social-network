@@ -35,7 +35,7 @@ export default function Navbar() {
 
                     </ListItemButton>
                 </NavLink>
-                <NavLink to="../dialogs">
+                <NavLink to="../chat">
                 <ListItemButton
 
                     selected={selectedIndex === 1}
@@ -44,7 +44,7 @@ export default function Navbar() {
                     <ListItemIcon>
                         <MessageIcon color={"primary"}/>
                     </ListItemIcon>
-                    <ListItemText primary="Dialogs"/>
+                    <ListItemText primary="Chat"/>
                 </ListItemButton>
                 </NavLink>
                 <NavLink to="../users">
