@@ -44,9 +44,6 @@ const usersReducer = (state = initialState, action: UserReducerActionType): User
 
 // thunks
 export const requestUsers = (currentPage: number, pageSize: number, filter: FilterType) => async (dispatch: Dispatch) => {
-
-    debugger
-
     dispatch(toggleIsFetching(true))
     dispatch(setCurrentPage(currentPage))
     dispatch(setFiler(filter))

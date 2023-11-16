@@ -7,6 +7,7 @@ import {authReducer} from "./redusers/auth-reducer";
 import {reducer as formReducer} from 'redux-form'
 import thunkMiddleware from "redux-thunk"
 import {appReducer} from "./redusers/app-reducer";
+import chatReducer from "./redusers/chat-reducer";
 
 
 export type StoreType = ReturnType<typeof rootReducers>
@@ -18,6 +19,7 @@ const rootReducers = combineReducers({
     sidebar: sidebarReducer,
     auth: authReducer,
     app: appReducer,
+    chat: chatReducer,
     form: formReducer
 })
 
