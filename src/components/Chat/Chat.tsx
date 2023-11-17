@@ -1,9 +1,13 @@
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import {useEffect, useState} from "react";
-import {ChatMessageType} from "../../api/chat-api";
+import {ChatMessageType, StatusType} from "../../api/chat-api";
 import {useDispatch, useSelector} from "react-redux";
-import {sendMessage, startMessagesListening, stopMessagesListening} from "../../redux/redusers/chat-reducer";
+import {
+    sendMessage,
+    startMessagesListening,
+    stopMessagesListening
+} from "../../redux/redusers/chat-reducer";
 import {StoreType} from "../../redux/store";
 
 
@@ -52,6 +56,8 @@ export const AddMessageForm = () => {
 
     const [text, setText ] = useState('')
 
+    const status = useSelector<StoreType, StatusType>(state => state.chat.status)
+
     const dispatch =  useDispatch()
 
     const sendMessageHandler = () => {
@@ -66,7 +72,7 @@ export const AddMessageForm = () => {
 
     return <div>
         <TextField onChange={(e) => setText(e.currentTarget.value)}/>
-        <Button onClick={sendMessageHandler} variant={'contained'}>Send</Button>
+        <Button disabled={status !== 'ready'} onClick={sendMessageHandler} variant={'contained'}>Send</Button>
     </div>
 }
 
