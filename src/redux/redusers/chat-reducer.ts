@@ -1,5 +1,6 @@
 import {chatApi, ChatMessageType, StatusType} from "../../api/chat-api";
 import {Dispatch} from "redux";
+import {v1} from "uuid";
 
 
 const initialState = {
@@ -10,7 +11,7 @@ const initialState = {
 const chatReducer = (state: typeof initialState = initialState, action: ChatActionType) => {
     switch (action.type) {
         case "MESSAGES-RECEIVED":
-            return {...state, messages: [...action.payload.messages ]}
+            return {...state, messages: [...state.messages, ...action.payload.messages.map(message => ({...message, messageId: v1()}))]}
         case "STATUS-CHANGED":
             return {...state, status: action.payload.status}
         default:
@@ -36,7 +37,8 @@ export const statusChanged= (status: StatusType) => {
 let _newMessageHandler: ((messages: ChatMessageType[]) => void) | null = null
 const newMessageHandlerCreator = (dispatch: Dispatch) => {
     if (_newMessageHandler === null) {
-        _newMessageHandler =  (messages: ChatMessageType[]) => {
+        _newMessageHandler = (messages: ChatMessageType[]) => {
+            debugger
             dispatch(messagesReceived(messages))
         }
     }
@@ -56,9 +58,9 @@ const statusChangedCreator = (dispatch: Dispatch) => {
 }
 
 export const startMessagesListening = () => async (dispatch: Dispatch) => {
-    chatApi.start()
     chatApi.subscribe('message-received', newMessageHandlerCreator(dispatch))
     chatApi.subscribe('status-changed',  statusChangedCreator(dispatch))
+    chatApi.start()
 }
 
 export const stopMessagesListening = () => async (dispatch: Dispatch) => {
