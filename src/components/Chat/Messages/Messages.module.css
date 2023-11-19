@@ -1,0 +1,32 @@
+.messages {}
+
+.message {
+    margin-top: 10px;
+    display: flex;
+    text-align: center;
+    padding: 10px;
+}
+
+.profileInfo {
+    display: flex;
+    gap: 10px;
+}
+
+.avatar {
+    width: 50px;
+    height: auto;
+    border-radius: 50%;
+    border: 1px black solid;
+}
+
+.name {
+    display: flex;
+    align-items: center;
+    min-width: 100px;
+}
+
+.messageText {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+}

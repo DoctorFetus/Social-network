@@ -38,7 +38,6 @@ let _newMessageHandler: ((messages: ChatMessageType[]) => void) | null = null
 const newMessageHandlerCreator = (dispatch: Dispatch) => {
     if (_newMessageHandler === null) {
         _newMessageHandler = (messages: ChatMessageType[]) => {
-            debugger
             dispatch(messagesReceived(messages))
         }
     }
