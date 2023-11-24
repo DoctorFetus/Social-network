@@ -12,7 +12,6 @@ export const closeChannel = () =>  {
 
 export const messageHandler = (e: MessageEvent) => {
     const newMessages = JSON.parse(e.data)
-    console.log(subscribes)
     subscribes["message-received"].forEach(subscriber => subscriber(newMessages))
 }
 

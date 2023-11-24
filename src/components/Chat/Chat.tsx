@@ -19,8 +19,6 @@ export const Chat = () => {
             dispatch(stopMessagesListening())
         }
     }, []);
-
-
     return <div>
         {status === 'error'
             ? <div>Some error. Please, refresh page</div>

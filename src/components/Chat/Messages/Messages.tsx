@@ -13,6 +13,7 @@ export const Messages = () => {
 
     const messages = useSelector<StoreType, ChatMessageType[]>(state => state.chat.messages)
 
+
     useEffect(() => {
         lastMessageRef.current?.scrollIntoView({behavior: 'smooth'})
     }, [messages]);

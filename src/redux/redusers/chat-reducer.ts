@@ -36,6 +36,7 @@ export const statusChanged= (status: StatusType) => {
 
 let _newMessageHandler: ((messages: ChatMessageType[]) => void) | null = null
 const newMessageHandlerCreator = (dispatch: Dispatch) => {
+    console.log(_newMessageHandler)
     if (_newMessageHandler === null) {
         _newMessageHandler = (messages: ChatMessageType[]) => {
             dispatch(messagesReceived(messages))

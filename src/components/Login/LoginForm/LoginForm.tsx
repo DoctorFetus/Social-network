@@ -4,9 +4,14 @@ import {FormControl} from "../../common/FormsControl/FormsControl";
 import {required} from "../../../utils/validators/validators";
 import style from "./../../common/FormsControl/FormControl.module.css"
 import Button from "@mui/material/Button";
-import {FormControlLabel, FormGroup, FormLabel, Grid} from "@mui/material";
-import Checkbox from "@mui/material/Checkbox";
-import TextField from "@mui/material/TextField";
+import {FormControlLabel, FormGroup, Grid, Icon} from "@mui/material";
+import s from './LoginForm.module.css'
+import Typography from "@mui/material/Typography";
+import LoginIcon from '@mui/icons-material/Login';
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import Accordion from "@mui/material/Accordion";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 export type FormDataType = {
     email: string,
@@ -55,28 +60,17 @@ const LoginForm = ({error, handleSubmit, captchaUrl}: InjectedFormProps<FormData
             {/*        </button>*/}
             {/*    </div>*/}
             {/*</form>*/}
-            <Grid container style={{marginLeft: '250px'}}>
-                <Grid item xs={4}>
+            <Grid container className={s.container}>
+                <Grid item xs={5}>
                     {error && <div className={style.formSummaryError}>{error}</div>}
-                    <form onSubmit={handleSubmit}>
-                            <FormLabel>
-                                <p>
-                                    To log in get registered{" "}
-                                    <a style={{textDecoration: 'underline'}} href={"https://social-network.samuraijs.com/"} target={"_blank"}>
-                                        here
-                                    </a>
-                                </p>
-                                <p>or use common test account credentials:</p>
-                                <p> Email: free@samuraijs.com</p>
-                                <p>Password: free</p>
-                            </FormLabel>
+                    <Typography className={s.title}><span>Sign in </span><LoginIcon/></Typography>
+                    <form className={s.form} onSubmit={handleSubmit}>
                             <FormGroup>
-                                {/*<TextField>*/}
                                     <Field component={FormControl}
                                            name={"email"}
                                            placeholder={"Login"}/>
                                     <Field
-                                        style={{marginTop: '10px'}}
+                                        className={s.field}
                                         component={FormControl}
                                         name={"password"}
                                         type={"password"}
@@ -89,12 +83,31 @@ const LoginForm = ({error, handleSubmit, captchaUrl}: InjectedFormProps<FormData
                                         <Field component={FormControl} name={"rememberMe"} type="checkbox"/>
                                     }
                                 />
-                                <Button type={"submit"} variant={"contained"} color={"primary"}>
+                                <Button className={s.button} type={"submit"} variant={"contained"} color={"primary"}>
                                     Login
                                 </Button>
                             </FormGroup>
-                        {/*</FormControl>*/}
                     </form>
+                    <Accordion className={s.accordion}>
+                        <AccordionSummary
+                            expandIcon={<ExpandMoreIcon />}
+                            aria-controls="panel1a-content"
+                            id="panel1a-header"
+                        >
+                            <Typography>First time here?</Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                                <p>
+                                    To log in get registered{" "}
+                                    <a style={{textDecoration: 'underline'}} href={"https://social-network.samuraijs.com/"} target={"_blank"}>
+                                        here
+                                    </a>
+                                </p>
+                                <p>or use common test account credentials:</p>
+                                <p> Email: free@samuraijs.com</p>
+                                <p>Password: free</p>
+                        </AccordionDetails>
+                    </Accordion>
                 </Grid>
             </Grid>
         </>
