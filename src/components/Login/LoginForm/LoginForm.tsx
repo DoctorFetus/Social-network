@@ -27,39 +27,6 @@ type RestProps = {
 const LoginForm = ({error, handleSubmit, captchaUrl}: InjectedFormProps<FormDataType, RestProps> & RestProps) => {
     return (
         <>
-            {/*<form onSubmit={handleSubmit}>*/}
-            {/*    <div>*/}
-            {/*        <Field component={FormControl}*/}
-            {/*               name={"email"}*/}
-            {/*               placeholder={"Login"}*/}
-            {/*        />*/}
-            {/*    </div>*/}
-            {/*    <div>*/}
-            {/*        <Field*/}
-            {/*            component={FormControl}*/}
-            {/*            name={"password"}*/}
-            {/*            type={"password"}*/}
-            {/*            validate={[required]}*/}
-            {/*            placeholder={"Password"}/>*/}
-            {/*    </div>*/}
-            {/*    <label>*/}
-            {/*        <Field component={FormControl} name={"rememberMe"} type="checkbox"/> Remember me*/}
-            {/*    </label>*/}
-            {/*    { captchaUrl &&*/}
-            {/*        <>*/}
-            {/*        <img src={captchaUrl} alt={"captcha"}/>*/}
-            {/*            <Field*/}
-            {/*                component={FormControl}*/}
-            {/*                name={"captcha"}*/}
-            {/*                validate={[required]}*/}
-            {/*                placeholder={"captcha"}/>*/}
-            {/*        </>}*/}
-            {/*    <div>*/}
-            {/*        <button>*/}
-            {/*            <Button variant={"contained"}>Login</Button>*/}
-            {/*        </button>*/}
-            {/*    </div>*/}
-            {/*</form>*/}
             <Grid container className={s.container}>
                 <Grid item xs={5}>
                     {error && <div className={style.formSummaryError}>{error}</div>}
